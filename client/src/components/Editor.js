@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/editor.css";
 import { CirclePicker } from "react-color";
 import DrawingPanel from "./DrawingPanel";
+import { Link } from "react-router-dom";
 
 export default function Editor() {
   const [panelWidth, setPanelWidth] = useState(16);
@@ -55,10 +56,11 @@ export default function Editor() {
         </div>
       )}
 
+      <Link to="/pixelArt">
       <button onClick={initializeDrawingPanel} className="button">
         {buttonText}
       </button>
-
+      </Link>
       {hideOptions && (
         <CirclePicker color={selectedColor} onChangeComplete={changeColor} />
       )}

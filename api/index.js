@@ -28,3 +28,25 @@ app.get('/get', (req, res) => {
     }
   });
 });
+
+//LOGIN (AUTHENTICATE USER)
+app.post('/login', (req, res) => {
+
+  const { table } = req.query;
+
+  let nom = req.body.name;
+  let password = req.body.password;
+  
+ 
+  const user={nom, password}
+  pool.query(`INSERT INTO ${table} SET ?`, user, (err, results) => {
+      if(err) {
+          console.log("insert error");
+          res.send(err)
+      }
+      else {
+          res.send({ error: false, data: results, message: 'user has been updated successfully.' });
+      }
+
+  });   
+});

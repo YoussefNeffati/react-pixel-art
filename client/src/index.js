@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import axios from 'axios';
 import App from "./components/App";
+import { BrowserRouter } from 'react-router-dom';
 
 const rootElement = document.getElementById("root");
 
@@ -15,12 +16,9 @@ function callServer() {
   });
 }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-    <div>
-      {callServer()}
-    </div>
-  </React.StrictMode>,
+ReactDOM.render((
+    <BrowserRouter>
+        <App /> {/* The various pages will be displayed by the `Main` component. */}
+    </BrowserRouter>),
   rootElement
 );
