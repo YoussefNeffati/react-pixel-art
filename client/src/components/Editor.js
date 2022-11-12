@@ -56,11 +56,11 @@ export default function Editor() {
         </div>
       )}
 
-      <Link to="/pixelArt">
+      
       <button onClick={initializeDrawingPanel} className="button">
         {buttonText}
       </button>
-      </Link>
+   
       {hideOptions && (
         <CirclePicker color={selectedColor} onChangeComplete={changeColor} />
       )}

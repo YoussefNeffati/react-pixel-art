@@ -1,24 +1,42 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from "react-dom";
-import axios from 'axios';
-import App from "./components/App";
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./components/Editor";
+import Login from "./components/Login";
+import DrawingPanel from "./components/DrawingPanel";
+import "./styles/App.css";
 
-const rootElement = document.getElementById("root");
 
-function callServer() {
-  axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/get`, {
-    params: {
-      table: 'account',
-    },
-  }).then((response) => {
-    console.log(response.data);
-  });
+
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LayoutsWithNavbar />}>
+          <Route path="/" element={<Home />} />
+          <Route path="pixelArt" element={<DrawingPanel />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+} 
+
+function LayoutsWithNavbar() {
+  return (
+    <>
+      {/* Your navbar component */}
+      <Navbar />
+
+      {/* This Outlet is the place in which react-router will render your components that you need with the navbar */}
+      <Outlet />
+
+      {/* You can add a footer to get fancy in here :) */}
+    </>
+  );
 }
 
-ReactDOM.render((
-    <BrowserRouter>
-        <App /> {/* The various pages will be displayed by the `Main` component. */}
-    </BrowserRouter>),
-  rootElement
-);
+const root = ReactDOM.unstable_createRoot(document.getElementById('root'));
+root.render(<App />);
