@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const mysql = require('mysql');
-
+const bodyParser = require('body-parser');
 const app = express();
 
 const pool = mysql.createPool({
@@ -10,6 +10,9 @@ const pool = mysql.createPool({
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
 });
+
+app.use(bodyParser.json());
+var jsonParser = bodyParser.json()
 
 app.use(cors());
 
@@ -30,12 +33,12 @@ app.get('/get', (req, res) => {
 });
 
 //LOGIN (AUTHENTICATE USER)
-app.post('/inscription', (req, res) => {
+app.post('/inscription', jsonParser, (req, res) => {
 
   const { table } = req.query;
 
-  let nom = req.body.name;
-  let password = req.body.password;
+  let nom = req.body.user.name;
+  let password = req.body.user.password;
   
  
   const user={nom, password}

@@ -5,34 +5,48 @@ import "../styles/login.css";
 
 
 function callServer() {
-    const Database = [];
+    var Database = [];
+    //ne pas oublier de changer l'url
     const promise = axios.get(`http://localhost:8000/get`, {
         params: {
             table: 'account',
         },
     })
-    
-    const DataPromise = promise.then((response) => Database.push(response.data))
-    
+
+    promise.then((response) => Database.push(response.data))
+
     return Database;
 }
 
 function postServer(name, password) {
-    axios.post('/inscription', {
-        name: name,
-        password: password
-      })
-      .then((response) => {
+
+    const res = axios.post('http://localhost:8000/inscription', {
+        params: {
+            table: 'account',
+        },
+        body: JSON.stringify({
+            user: {
+                //name: name,
+                name: 'John',
+                //password: password
+                password: 'password'
+            }
+        })
+    }).then((response) => {
         console.log(response);
-      }, (error) => {
+    }, (error) => {
         console.log(error);
-      });
+    });
 }
 
 export default function Inscription() {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [errorMessages, setErrorMessages] = useState({});
 
+    const errors = {
+        uname: "Ce nom a déjà été pris"
+    };
 
     const handleSubmit = (event) => {
         //Prevent page reload
@@ -40,29 +54,30 @@ export default function Inscription() {
 
         var { uname, pass } = document.forms[0];
 
-        const database = [];
-        
-        database.push(callServer());
+        var database = [];
+
+        database = callServer();
 
         console.log(database);
 
-        const userData = null;
+        const userData = database.find((user) => user.username === uname.value);
 
-        for (let index = 0; index < database[0][0].length; index++) {
-            if (database[0][0][index].username === uname.value) {
-                userData=database[0][0][index];
-                break;
-            }
+        console.log("userData : " + userData);
+
+        if (userData) {
+            // Username not found
+            setErrorMessages({ name: "uname", message: errors.uname });
         }
-        //const userData = database.find((user) => user.username === uname.value);
-
-        console.log("userData : "+userData);
 
         // Post user info
-        postServer(userData.name, userData.password);
+        postServer(uname, pass);
         setIsSubmitted(true);
     };
 
+    const renderErrorMessage = (name) =>
+        name === errorMessages.name && (
+            <div className="error">{errorMessages.message}</div>
+        );
 
     // JSX code for login form
     const renderForm = (
@@ -71,6 +86,7 @@ export default function Inscription() {
                 <div className="input-container">
                     <label>Username </label>
                     <input type="text" name="uname" required />
+                    {renderErrorMessage("uname")}
                 </div>
                 <div className="input-container">
                     <label>Password </label>
@@ -80,7 +96,7 @@ export default function Inscription() {
                     <input type="submit" />
                 </div>
             </form>
-            <div style={{marginTop: '20px'}}>
+            <div style={{ marginTop: '20px' }}>
             </div>
         </div>
     );
