@@ -6,6 +6,7 @@ import Home from "./components/Editor";
 import Login from "./components/Login";
 import DrawingPanel from "./components/DrawingPanel";
 import "./styles/App.css";
+import Inscription from './components/Inscription';
 
 
 
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="pixelArt" element={<DrawingPanel />} />
           <Route path="login" element={<Login />} />
+          <Route path="inscription" element={<Inscription />} />
         </Route>
       </Routes>
     </BrowserRouter>

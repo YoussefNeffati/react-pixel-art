@@ -30,7 +30,7 @@ app.get('/get', (req, res) => {
 });
 
 //LOGIN (AUTHENTICATE USER)
-app.post('/login', (req, res) => {
+app.post('/inscription', (req, res) => {
 
   const { table } = req.query;
 
