@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import axios from 'axios';
-import "../styles/login.css"; 
+import "../styles/login.css";
 
 
-async function callServer() {
-    const res = await axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/get`, {
-      params: {
-        table: 'account',
-      },
-    }).then((response) => {
-      console.log(response.data);
-    });
-    return res.data;
-  }
+function callServer() {
+    const Database = [];
+    const promise = axios.get(`http://localhost:8000/get`, {
+        params: {
+            table: 'account',
+        },
+    })
+    
+    const DataPromise = promise.then((response) => Database.push(response.data))
+    
+    return Database;
+}
 
 export default function Login() {
 
@@ -31,8 +32,23 @@ export default function Login() {
 
         var { uname, pass } = document.forms[0];
 
-        // Find user login info
-        const userData = callServer;
+        const database = [];
+        
+        database.push(callServer());
+
+        console.log(database);
+
+        const userData = null;
+
+        for (let index = 0; index < database[0][0].length; index++) {
+            if (database[0][0][index].username === uname.value) {
+                userData=database[0][0][index];
+                break;
+            }
+        }
+        //const userData = database.find((user) => user.username === uname.value);
+
+        console.log("userData : "+userData);
 
         // Compare user info
         if (userData) {
