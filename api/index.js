@@ -1,7 +1,6 @@
 const cors = require('cors');
 const express = require('express');
 const mysql = require('mysql');
-const bodyParser = require('body-parser');
 const app = express();
 
 const pool = mysql.createPool({
@@ -11,13 +10,12 @@ const pool = mysql.createPool({
   database: process.env.MYSQL_DATABASE,
 });
 
-app.use(bodyParser.json());
-var jsonParser = bodyParser.json()
+app.use(express.json());
 
 app.use(cors());
 
-app.listen(process.env.REACT_APP_SERVER_PORT, () => {
-  console.log(`App server now listening on port ${process.env.REACT_APP_SERVER_PORT}`);
+app.listen(8000, () => {
+  console.log(`App server now listening on port ${8000}`);
 });
 
 app.get('/get', (req, res) => {
@@ -33,8 +31,7 @@ app.get('/get', (req, res) => {
 });
 
 //LOGIN (AUTHENTICATE USER)
-app.post('/inscription', jsonParser, (req, res) => {
-
+app.post('/inscription', (req, res) => {
   const { table } = req.query;
 
   let nom = req.body.user.name;
@@ -42,7 +39,7 @@ app.post('/inscription', jsonParser, (req, res) => {
   
  
   const user={nom, password}
-  pool.query(`INSERT INTO ${table} SET ?`, user, (err, results) => {
+  pool.query(`INSERT INTO account (name,password) VALUES ('${nom}','${password}')`, (err, results) => {
       if(err) {
           console.log("insert error");
           res.send(err)

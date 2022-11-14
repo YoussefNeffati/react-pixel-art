@@ -7,6 +7,7 @@ COPY package.json /app
 COPY yarn.lock /app
 COPY . /app
 
+RUN yarn global add nodemon
 RUN yarn install
 
 CMD ["yarn", "start"]

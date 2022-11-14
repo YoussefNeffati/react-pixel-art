@@ -24,14 +24,12 @@ function postServer(name, password) {
         params: {
             table: 'account',
         },
-        body: JSON.stringify({
-            user: {
-                //name: name,
-                name: 'John',
-                //password: password
-                password: 'password'
-            }
-        })
+        user: {
+            name: name.value.toString(),
+            
+            password: password.value.toString()
+            
+        }
     }).then((response) => {
         console.log(response);
     }, (error) => {
