@@ -9,8 +9,11 @@ export default function Editor() {
   const [panelHeight, setPanelHeight] = useState(16);
   const [hideOptions, setHideOptions] = useState(false);
   const [hideDrawingPanel, setHideDrawingPanel] = useState(true);
-  const [buttonText, setButtonText] = useState("start drawing");
+  const [buttonText, setButtonText] = useState("Commencer à dessiner");
   const [selectedColor, setColor] = useState("#f44336");
+  const [nbUsersInscrit, setNbUsersInscrit] = useState(0);
+  const [nbPixelboard, setNbPixelboard] = useState(0);
+  
 
   function initializeDrawingPanel() {
     setHideOptions(!hideOptions);
@@ -28,7 +31,9 @@ export default function Editor() {
   return (
     <div id="editor">
       <h1>Pixel Editor</h1>
-      {hideDrawingPanel && <h2>Enter Panel Dimensions</h2>}
+      <span>Nombre de joueur : {nbUsersInscrit}</span>
+      <span>Nombre de Pixelboard : {nbPixelboard}</span>
+      {hideDrawingPanel && <h2>Entrez les dimensions du Pixelboard</h2>}
       {hideDrawingPanel && (
         <div id="options">
           <div className="option">
@@ -40,7 +45,7 @@ export default function Editor() {
                 setPanelWidth(e.target.value);
               }}
             />
-            <span>Width</span>
+            <span>Largeur</span>
           </div>
           <div className="option">
             <input
@@ -51,7 +56,7 @@ export default function Editor() {
                 setPanelHeight(e.target.value);
               }}
             />
-            <span>Height</span>
+            <span>Hauteur</span>
           </div>
         </div>
       )}
