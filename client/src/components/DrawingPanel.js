@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "../styles/drawingPanel.css";
+import "../styles/drawingPanel.scss";
 import Row from "./Row";
 //import { exportComponentAsPNG } from "react-component-export-image";
 

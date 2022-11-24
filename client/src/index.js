@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Editor";
 import Login from "./components/Login";
 import DrawingPanel from "./components/DrawingPanel";
-import "./styles/App.css";
+import "./styles/App.scss";
 import Inscription from './components/Inscription';
 
 
@@ -40,5 +40,10 @@ function LayoutsWithNavbar() {
   );
 }
 
-const root = ReactDOM.unstable_createRoot(document.getElementById('root'));
-root.render(<App />);
+const rootElement = document.getElementById("root");
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  rootElement
+);

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "../styles/editor.css";
+import "../styles/editor.scss";
 import { CirclePicker } from "react-color";
 import DrawingPanel from "./DrawingPanel";
-import { Link } from "react-router-dom";
+import Countdown from 'react-countdown';
+import Login from "./Login";
 
 export default function Editor() {
   const [panelWidth, setPanelWidth] = useState(16);
@@ -13,15 +14,29 @@ export default function Editor() {
   const [selectedColor, setColor] = useState("#f44336");
   const [nbUsersInscrit, setNbUsersInscrit] = useState(0);
   const [nbPixelboard, setNbPixelboard] = useState(0);
-  
+  const renderer = ({ minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      window.location.reload(false);
+    } else {
+      // Render a countdown
+      return <span>{minutes}:{seconds}</span>;
+    }
+  };
 
   function initializeDrawingPanel() {
     setHideOptions(!hideOptions);
     setHideDrawingPanel(!hideDrawingPanel);
 
-    buttonText === "start drawing"
+    buttonText === "Commencer à dessiner"
       ? setButtonText("reset")
-      : setButtonText("start drawing");
+      : setButtonText("Commencer à dessiner");
+  }
+
+  function resetDrawingPanel() {
+    setHideOptions(!hideOptions);
+    setHideDrawingPanel(!hideDrawingPanel);
+    setButtonText("Commencer à dessiner");
   }
 
   function changeColor(color) {
@@ -61,21 +76,24 @@ export default function Editor() {
         </div>
       )}
 
-      
+
       <button onClick={initializeDrawingPanel} className="button">
         {buttonText}
       </button>
-   
+
       {hideOptions && (
         <CirclePicker color={selectedColor} onChangeComplete={changeColor} />
       )}
 
       {hideOptions && (
-        <DrawingPanel
-          width={panelWidth}
-          height={panelHeight}
-          selectedColor={selectedColor}
-        />
+        <>Temps restant : <Countdown
+          date={Date.now() + 1500000}
+          renderer={renderer} />
+          
+          <DrawingPanel
+            width={panelWidth}
+            height={panelHeight}
+            selectedColor={selectedColor} /></>
       )}
     </div>
   );

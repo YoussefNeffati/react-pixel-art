@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/pixel.css";
+import "../styles/pixel.scss";
 
 export default function Pixel(props) {
   const { selectedColor } = props;
@@ -32,7 +32,7 @@ export default function Pixel(props) {
       onClick={applyColor}
       onMouseEnter={changeColorOnHover}
       onMouseLeave={resetColor}
-      style={{ backgroundColor: pixelColor }}
+      style={{ backgroundColor: pixelColor, border: '1px solid black'}}
     ></div>
   );
 }
