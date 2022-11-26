@@ -14,6 +14,7 @@ export default function Editor() {
   const [selectedColor, setColor] = useState("#f44336");
   const [nbUsersInscrit, setNbUsersInscrit] = useState(0);
   const [nbPixelboard, setNbPixelboard] = useState(0);
+  
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       // Render a completed state
@@ -33,11 +34,6 @@ export default function Editor() {
       : setButtonText("Commencer à dessiner");
   }
 
-  function resetDrawingPanel() {
-    setHideOptions(!hideOptions);
-    setHideDrawingPanel(!hideDrawingPanel);
-    setButtonText("Commencer à dessiner");
-  }
 
   function changeColor(color) {
     setColor(color.hex);

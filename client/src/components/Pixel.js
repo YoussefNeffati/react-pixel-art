@@ -7,10 +7,12 @@ export default function Pixel(props) {
   const [pixelColor, setPixelColor] = useState("#fff");
   const [oldColor, setOldColor] = useState(pixelColor);
   const [canChangeColor, setCanChangeColor] = useState(true);
+  
 
   function applyColor() {
     setPixelColor(selectedColor);
     setCanChangeColor(false);
+
   }
 
   function changeColorOnHover() {
@@ -32,7 +34,8 @@ export default function Pixel(props) {
       onClick={applyColor}
       onMouseEnter={changeColorOnHover}
       onMouseLeave={resetColor}
-      style={{ backgroundColor: pixelColor, border: '1px solid black'}}
-    ></div>
+      style={{ backgroundColor: pixelColor, border: '1px solid black' }}
+    >
+    </div>
   );
 }
