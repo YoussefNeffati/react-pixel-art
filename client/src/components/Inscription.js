@@ -100,7 +100,7 @@ export default function Inscription() {
     );
 
     return (
-        <div className="applogin">
+        <div className="applogin" id="backgroundDarkLight">
             <div className="login-form">
                 <div className="title">S'inscrire</div>
                 {isSubmitted ? <div>Vous êtes inscrit</div> : renderForm}

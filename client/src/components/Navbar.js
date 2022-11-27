@@ -1,13 +1,45 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import "../styles/navbar.scss"; 
+import "../styles/navbar.scss";
 
+let theme = 'dark';
+
+const toggleTheme = () => {
+    console.log('theme', theme);
+
+    if (theme === 'dark') {
+        document.body.style.background = '#e8e8e8'
+        document.body.style.color = '#222831'
+        try {
+            document.getElementById('backgroundDarkLight').style.background = '#e8e8e8'
+        } catch (error) {
+
+        }
+        theme = 'light'
+    } else {
+        document.body.style.background = '#222831'
+        document.body.style.color = '#e8e8e8'
+        try {
+            document.getElementById('backgroundDarkLight').style.background = '#222831'
+        } catch (error) {
+
+        }
+        theme = 'dark'
+    }
+
+};
 const Navbar = () => (
+
     <header className='navbar'>
         <Link className="navbar__title navbar__item" to="/">PixelArt</Link>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={toggleTheme}></input>
+            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="material-symbols-outlined">
+                dark_mode
+            </span></label>
+        </div>
         <Link className="navbar__item" to="/">Accueil</Link>
         <Link className="navbar__item" to="/login">Se connecter</Link>
-              
     </header>
 );
 

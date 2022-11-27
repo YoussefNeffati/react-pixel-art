@@ -87,7 +87,7 @@ export default function Login() {
     );
 
     return (
-        <div className="applogin">
+        <div className="applogin" id='backgroundDarkLight'>
             <div className="login-form">
                 <div className="title">Se connecter</div>
                 {isSubmitted ? <div>Vous êtes connecté</div> : renderForm}
