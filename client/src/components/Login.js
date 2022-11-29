@@ -42,6 +42,8 @@ export default function Login() {
                     setErrorMessages({ name: "pass", message: errors.pass });
                 } else {
                     setIsSubmitted(true);
+                    localStorage.setItem('username', userData.name);
+                    window.location.reload();
                 }
             } else {
                 // Username not found

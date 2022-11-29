@@ -18,7 +18,7 @@ export default function Editor() {
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       // Render a completed state
-      window.location.reload(false);
+      window.location.reload();
     } else {
       // Render a countdown
       return <span>{minutes}:{seconds}</span>;

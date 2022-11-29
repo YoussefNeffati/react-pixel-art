@@ -28,19 +28,40 @@ const toggleTheme = () => {
     }
 
 };
-const Navbar = () => (
 
-    <header className='navbar'>
-        <Link className="navbar__title navbar__item" to="/">PixelArt</Link>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={toggleTheme}></input>
-            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="material-symbols-outlined">
-                dark_mode
-            </span></label>
-        </div>
-        <Link className="navbar__item" to="/">Accueil</Link>
-        <Link className="navbar__item" to="/login">Se connecter</Link>
-    </header>
-);
+export default function Navbar() {
 
-export default Navbar;
+
+    const logout = () => {
+        localStorage.removeItem('username');
+        window.location.reload();
+      };
+
+    let button;
+
+    
+    if (localStorage.getItem("username") === null) {
+        button = <Link className="navbar__item" to="/login">Se connecter</Link>;
+      } else {
+        button = <div className="navbar__item">Bonjour {localStorage.getItem("username")}
+        <button className="navbar__item" onClick={logout}>logout user</button>
+        </div> ;
+        
+      }
+      
+    return (
+        <header className='navbar'>
+            <Link className="navbar__title navbar__item" to="/">PixelArt</Link>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={toggleTheme}></input>
+                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="material-symbols-outlined">
+                    dark_mode
+                </span></label>
+            </div>
+            <Link className="navbar__item" to="/">Accueil</Link>
+
+            {button}
+            
+        </header>
+    );
+}

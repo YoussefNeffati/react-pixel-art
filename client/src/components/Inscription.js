@@ -57,6 +57,8 @@ export default function Inscription() {
             // Post user info
             postServer(uname, pass);
             setIsSubmitted(true);
+            localStorage.setItem('username', uname.value.toString());
+            window.location.reload();
             }
             
 
