@@ -11,7 +11,7 @@ const toggleTheme = () => {
         document.body.style.background = '#e8e8e8'
         document.body.style.color = '#222831'
         try {
-            document.getElementById('backgroundDarkLight').style.background = '#e8e8e8'
+            document.getElementById('backgroundDarkLight').style.color = '#222831'
         } catch (error) {
 
         }
@@ -20,7 +20,7 @@ const toggleTheme = () => {
         document.body.style.background = '#222831'
         document.body.style.color = '#e8e8e8'
         try {
-            document.getElementById('backgroundDarkLight').style.background = '#222831'
+            document.getElementById('backgroundDarkLight').style.color = '#e8e8e8'
         } catch (error) {
 
         }

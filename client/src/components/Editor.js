@@ -73,7 +73,7 @@ export default function Editor() {
       )}
 
 
-      <button onClick={initializeDrawingPanel} className="button">
+      <button onClick={initializeDrawingPanel} className="button" id="backgroundDarkLight">
         {buttonText}
       </button>
 
