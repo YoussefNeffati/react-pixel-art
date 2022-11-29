@@ -4,32 +4,22 @@ import { Link } from "react-router-dom";
 import "../styles/login.scss";
 
 
-function callServer() {
-    var Database = [];
-    //ne pas oublier de changer l'url
-    const promise = axios.get(`http://localhost:8000/get`, {
-        params: {
-            table: 'account',
-        },
-    })
+async function callServer() {
+    let res = await axios.get('http://localhost:8000/users');
 
-    promise.then((response) => Database.push(response.data))
+    let data = res.data;
+    console.log(data);
 
-    return Database;
+    return data;
 }
 
 function postServer(name, password) {
 
-    const res = axios.post('http://localhost:8000/inscription', {
-        params: {
-            table: 'account',
-        },
-        user: {
-            name: name.value.toString(),
-            
-            password: password.value.toString()
-            
-        }
+    axios.post('http://localhost:8000/adduser', {
+
+        name: name.value.toString(),
+        password: password.value.toString()
+
     }).then((response) => {
         console.log(response);
     }, (error) => {
@@ -52,24 +42,27 @@ export default function Inscription() {
 
         var { uname, pass } = document.forms[0];
 
-        var database = [];
+        callServer().then(value => {
 
-        database = callServer();
+            const userData = value.find((user) => user.name === uname.value);
 
-        console.log(database);
+            //console.log(userData);
 
-        const userData = database.find((user) => user.username === uname.value);
+            // Compare user info
+            if (userData) {
+                // Username existe deja
+                setErrorMessages({ name: "uname", message: errors.uname });
+            }
+            else{
+            // Post user info
+            postServer(uname, pass);
+            setIsSubmitted(true);
+            }
+            
 
-        console.log("userData : " + userData);
+        });
 
-        if (userData) {
-            // Username not found
-            setErrorMessages({ name: "uname", message: errors.uname });
-        }
 
-        // Post user info
-        postServer(uname, pass);
-        setIsSubmitted(true);
     };
 
     const renderErrorMessage = (name) =>

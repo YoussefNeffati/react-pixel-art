@@ -29,13 +29,11 @@ export default function App() {
 function LayoutsWithNavbar() {
   return (
     <>
-      {/* Your navbar component */}
-      <Navbar />
+      {<Navbar/>}
+      
 
-      {/* This Outlet is the place in which react-router will render your components that you need with the navbar */}
-      <Outlet />
-
-      {/* You can add a footer to get fancy in here :) */}
+      {<Outlet/>}
+      
     </>
   );
 }

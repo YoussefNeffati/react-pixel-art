@@ -4,17 +4,13 @@ import { Link } from "react-router-dom";
 import "../styles/login.scss";
 
 
-function callServer() {
-    var Database = [];
-    const promise = axios.get(`http://localhost:8000/get`, {
-        params: {
-            table: 'account',
-        },
-    })
-    
-    promise.then((response) => Database.push(response.data))
-    
-    return Database;
+async function callServer() {
+    let res = await axios.get('http://localhost:8000/users');
+
+    let data = res.data;
+    console.log(data);
+
+    return data;
 }
 
 export default function Login() {
@@ -33,28 +29,29 @@ export default function Login() {
 
         var { uname, pass } = document.forms[0];
 
-        var database = [];
-        
-        database= callServer();
+        callServer().then(value => {
 
-        console.log(database);
+            const userData = value.find((user) => user.name === uname.value);
 
-        const userData = database.find((user) => user.username === uname.value);
+            console.log(userData);
 
-        console.log(userData);
-
-        // Compare user info
-        if (userData) {
-            if (userData.password !== pass.value) {
-                // Invalid password
-                setErrorMessages({ name: "pass", message: errors.pass });
+            // Compare user info
+            if (userData) {
+                if (userData.password !== pass.value) {
+                    // Invalid password
+                    setErrorMessages({ name: "pass", message: errors.pass });
+                } else {
+                    setIsSubmitted(true);
+                }
             } else {
-                setIsSubmitted(true);
+                // Username not found
+                setErrorMessages({ name: "uname", message: errors.uname });
             }
-        } else {
-            // Username not found
-            setErrorMessages({ name: "uname", message: errors.uname });
-        }
+        });
+
+
+
+
     };
 
     const renderErrorMessage = (name) =>
@@ -80,8 +77,8 @@ export default function Login() {
                     <input type="submit" />
                 </div>
             </form>
-            <div style={{marginTop: '20px'}}>
-            <Link to="/inscription" style={{textDecoration: 'none', color: '#30475e'}}>Pas de compte ? S'inscrire</Link>
+            <div style={{ marginTop: '20px' }}>
+                <Link to="/inscription" style={{ textDecoration: 'none', color: '#30475e' }}>Pas de compte ? S'inscrire</Link>
             </div>
         </div>
     );
