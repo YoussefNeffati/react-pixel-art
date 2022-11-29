@@ -44,7 +44,7 @@ export default function Navbar() {
         button = <Link className="navbar__item" to="/login">Se connecter</Link>;
       } else {
         button = <div className="navbar__item">Bonjour {localStorage.getItem("username")}
-        <button className="navbar__item" onClick={logout}>logout user</button>
+        <button className="navbar__item" onClick={logout}>Se Déconnecter</button>
         </div> ;
         
       }

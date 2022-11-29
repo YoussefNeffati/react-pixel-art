@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.scss";
 
 
@@ -17,6 +17,7 @@ export default function Login() {
 
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const navigate = useNavigate();
 
     const errors = {
         uname: "invalid username",
@@ -43,6 +44,7 @@ export default function Login() {
                 } else {
                     setIsSubmitted(true);
                     localStorage.setItem('username', userData.name);
+                    navigate('/');
                     window.location.reload();
                 }
             } else {

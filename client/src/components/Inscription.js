@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/login.scss";
 
 
@@ -31,7 +31,8 @@ export default function Inscription() {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
-
+    const navigate = useNavigate();
+    
     const errors = {
         uname: "Ce nom a déjà été pris"
     };
@@ -58,6 +59,7 @@ export default function Inscription() {
             postServer(uname, pass);
             setIsSubmitted(true);
             localStorage.setItem('username', uname.value.toString());
+            navigate('/');
             window.location.reload();
             }
             
