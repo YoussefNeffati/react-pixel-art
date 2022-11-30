@@ -7,6 +7,8 @@ const Board = new Schema({
 	statuts: { type: Boolean, default: false },
 	nLines: { type: Number, default: 0 },
 	nColumns: { type: Number, default: 0 },
+	// delai en seconde
+	delai: { type: Number, default: 0 },
 	mode: { type: Boolean, default: false },
 	author: { type: Schema.Types.ObjectId, ref: "User" }
 });
