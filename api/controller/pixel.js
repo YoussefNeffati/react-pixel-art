@@ -10,3 +10,14 @@ exports.getpixel = async (request, response) => {
 		response.status(500).send(error);
 	}
 };
+
+// post pixel
+exports.savepixel = async (request, response) => {
+	try {
+		const pixel = new pixelModel(request.body);
+		await pixel.save();
+		response.status(201).send(pixel);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+};
