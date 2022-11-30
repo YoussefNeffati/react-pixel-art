@@ -5,12 +5,16 @@ import Countdown from 'react-countdown';
 //import { exportComponentAsPNG } from "react-component-export-image";
 
 export default function DrawingPanel(props) {
-  const { width, height, selectedColor } = props;
+  const { width, height, selectedColor, delaiMin, delaiSec } = props;
 
   const panelRef = useRef();
 
   const [hideCompteur, setHideCompteur] = useState(false);
   const [disable, setDisable] = useState(false);
+
+  
+
+  const delai = (parseInt(delaiMin)*60000)+(parseInt(delaiSec)*1000);
 
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
@@ -21,7 +25,7 @@ export default function DrawingPanel(props) {
     } else {
       // Render a countdown
       setDisable(true)
-      return <span>Tu peux rejouer dans {minutes}:{seconds}</span>;
+      return <span>Tu peux rejouer dans {minutes} minutes et {seconds} secondes</span>;
     }
   };
 
@@ -43,7 +47,7 @@ export default function DrawingPanel(props) {
       </div>
       {hideCompteur && (
         <Countdown
-          date={Date.now() + 300000}
+          date={Date.now()+delai}
           renderer={renderer} />
       )}
       {/* <button onClick={() => exportComponentAsPNG(panelRef)} className="button">
