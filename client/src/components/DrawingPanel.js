@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import "../styles/drawingPanel.scss";
 import Row from "./Row";
 import Countdown from 'react-countdown';
-import Pixel from "./Pixel";
 //import { exportComponentAsPNG } from "react-component-export-image";
 
 export default function DrawingPanel(props) {
