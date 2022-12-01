@@ -8,4 +8,7 @@ app.get("/pixels/:idboard", pixelController.getpixel);
 // post pixel
 app.post("/savepixel", pixelController.savepixel);
 
+// get one pixel by x, y and board id
+app.post("/getpixel", pixelController.getonepixel);
+
 module.exports = app;

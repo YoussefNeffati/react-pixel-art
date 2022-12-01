@@ -1,8 +1,13 @@
 .pixel {
-  width: 2rem;
-  height: 2rem;
+	width: 2rem;
+	height: 2rem;
 
-  &:hover {
-    cursor: pointer;
-  }
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.popover {
+	min-width: 300px;
+	padding: 15px;
 }
