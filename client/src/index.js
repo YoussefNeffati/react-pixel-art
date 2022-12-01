@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import DrawingPanel from "./components/DrawingPanel";
 import "./styles/App.scss";
 import Inscription from './components/Inscription';
+import Board from "./components/Board";
 
 
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="pixelArt" element={<DrawingPanel />} />
           <Route path="login" element={<Login />} />
           <Route path="inscription" element={<Inscription />} />
+          <Route path="allBoard" element={<Board />} />
         </Route>
       </Routes>
     </BrowserRouter>
