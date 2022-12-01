@@ -14,9 +14,24 @@ exports.getpixel = async (request, response) => {
 // post pixel
 exports.savepixel = async (request, response) => {
 	try {
-		const pixel = new pixelModel(request.body);
-		await pixel.save();
-		response.status(201).send(pixel);
+		// verify if pixel exist
+		const pixel = await pixelModel.findOne({
+			x: request.body.x,
+			y: request.body.y,
+			board: request.body.board
+		});
+		if (pixel) {
+			// update pixel
+			pixel.color = request.body.color;
+			pixel.user = request.body.user;
+			await pixel.save();
+			response.status(200).send(pixel);
+		} else {
+			// create pixel
+			const pixel = new pixelModel(request.body);
+			await pixel.save();
+			response.status(201).send(pixel);
+		}
 	} catch (error) {
 		response.status(500).send(error);
 	}

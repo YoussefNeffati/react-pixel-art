@@ -6,6 +6,6 @@ const app = express();
 app.get("/pixels/:idboard", pixelController.getpixel);
 
 // post pixel
-app.post("/pixels", pixelController.savepixel);
+app.post("/savepixel", pixelController.savepixel);
 
 module.exports = app;

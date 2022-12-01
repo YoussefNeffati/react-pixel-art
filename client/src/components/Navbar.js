@@ -27,6 +27,8 @@ const toggleTheme = () => {
 export default function Navbar() {
 	const logout = () => {
 		localStorage.removeItem("username");
+		localStorage.removeItem("iduser");
+		localStorage.removeItem("currentboad");
 		window.location.reload();
 	};
 

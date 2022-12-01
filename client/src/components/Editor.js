@@ -41,8 +41,6 @@ export default function Editor() {
 			.then((data) => {
 				setNbPixelboard(data.length);
 			});
-		
-		
 
 		// verify if we have a current board
 		fetch("/currentboad")
@@ -79,7 +77,6 @@ export default function Editor() {
 
 	// aLL informatioN ABOUT THE BOARD
 	function setInfosBoard(data) {
-		console.log("data", data);
 		setAuthor(data.author.name);
 		setTitle(data.title);
 		setStartDate(data.createdAt);
@@ -87,6 +84,7 @@ export default function Editor() {
 		setPanelWidth(data.nLines);
 		setPanelHeight(data.nColumns);
 		setDelaiSecondes(data.delai);
+		localStorage.setItem("currentboad", data._id);
 	}
 
 	return (
@@ -102,7 +100,7 @@ export default function Editor() {
 										<i className="fa fa-user fa-2x"></i>
 									</div>
 									<div className="col mr-2">
-										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de joueur</div>
+										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de joueurs</div>
 
 										<div className="h5 mb-0 font-weight-bold text-gray-800">
 											<b>{nbUsersInscrit}</b>
@@ -120,7 +118,7 @@ export default function Editor() {
 										<i className="fa fa-bullhorn fa-2x"></i>
 									</div>
 									<div className="col mr-2">
-										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de Pixelboard</div>
+										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de Pixelboards</div>
 
 										<div className="h5 mb-0 font-weight-bold text-gray-800">
 											<b>{nbPixelboard}</b>
@@ -133,16 +131,19 @@ export default function Editor() {
 				</div>
 			</div>
 			<span>
-				<button className="button"
+				<button
+					className="button"
 					onClick={(e) => {
 						e.preventDefault();
 						fetch("/boards")
-              .then((res) => res.json())
-              .then((data) => {
-                console.log(data);
-              });
-					}
-					}>Voir tous les Pixelboards</button>
+							.then((res) => res.json())
+							.then((data) => {
+								console.log(data);
+							});
+					}}
+				>
+					Voir tous les Pixelboards
+				</button>
 			</span>
 			{isLogged && <h2>Aucun dessin est en cours veuillez créer un nouveau Pixelboard</h2>}
 			{isLogged && (
