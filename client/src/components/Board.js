@@ -7,33 +7,48 @@ export default class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardData: {},
+      boardData: [],
     };
-    }
-    
-    componentDidMount() {
-        	fetch("/boards")
-            .then((res) => res.json())
-                .then((data) => {
-                 this.setState({ boardData: data });
-              console.log(data);
-            });
-    }
+  }
+
+  componentDidMount() {
+    fetch("/boards")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ boardData: data });
+        console.log(data);
+      });
+  }
 
   render() {
-        const { boardData } = this.state
-        const { 
-          title, 
-          author,
-        } = boardData;
+    const { boardData } = this.state;
+    const tab = [];
+
+    for (let i = 0; i < boardData.length; i++) {
+      tab.push(
+      <tr key={i}>
+        <td>{boardData[i].title}</td>
+        <td>{boardData[i].nColumns}</td>
+        <td>{boardData[i].nLines}</td>
+        <td>{boardData[i].createdAt}</td>
+        <td>{boardData[i].finishedAt}</td>
+      </tr>);
+    }
     return (
       <div>
-            <h1>Ici la liste des boards crées</h1>
-            <table>
-                
-            </table>
-        <h1>{title}</h1>
-        <h2>{author}</h2>
+        <h1>Ici la liste des boards crées</h1>
+        <table id="boards">
+          <tbody>
+            <tr>
+              <th>Titre</th>
+              <th>Nombre colonnes</th>
+              <th>Nombre lignes</th>
+              <th>Date début</th>
+              <th>Date fin</th>
+            </tr>
+            {tab}
+            </tbody>
+        </table>
       </div>
     );
   }
@@ -41,5 +56,5 @@ export default class Board extends Component {
 
 
 
- 
- 
+
+
