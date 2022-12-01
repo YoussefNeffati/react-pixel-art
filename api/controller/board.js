@@ -15,17 +15,12 @@ exports.getboard = async (request, response) => {
 // get current borad by status false and finishedAt > now
 exports.getcurrentboad = async (request, response) => {
 	try {
-		const board = await boardModel.find({ statuts: false, finishedAt: { $gt: Date.now() } });
+		var board = await boardModel.findOne({ statuts: false, finishedAt: { $gt: Date.now() } });
 		if (!board) {
-			response.status(404).send("No item found");
-			// create board if not exist
-			const board = new boardModel(request.body);
-			await board.save();
+			board = [];
 		}
 		response.status(200).send(board);
-	} catch (error) {
-		response.status(500).send(error);
-	}
+	} catch (error) {}
 };
 
 // post board if not exist status true and return board
@@ -35,9 +30,12 @@ exports.saveboard = async (request, response) => {
 		const user = await userModel.findOne({ username: request.body.username });
 		request.body.author = user._id;
 		request.body.delai = request.body.delaimin * 60 + request.body.delaisec;
+		request.body.finishedAt = Date.parse(request.body.finishedAt);
 		const board = new boardModel(request.body);
 		await board.save();
 		response.status(201).send(board);
+		// update all board if finishedAt < now
+		await boardModel.updateMany({ statuts: false, finishedAt: { $lt: Date.now() } }, { statuts: true });
 	} catch (error) {
 		response.status(500).send(error);
 	}

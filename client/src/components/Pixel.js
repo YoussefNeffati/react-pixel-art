@@ -11,7 +11,7 @@ export default function Pixel(props) {
 	function applyColor() {
 		setPixelColor(selectedColor);
 		setCanChangeColor(false);
-
+		console.log("selectedColor", selectedColor);
 		// call api to save color
 	}
 
