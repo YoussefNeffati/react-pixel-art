@@ -20,7 +20,7 @@ export default function Editor() {
 	const [isLogged, setIsLogged] = useState(false);
 	const [isNotLogged, setIsNotLogged] = useState(false);
 	const [createBoard, setCreateBoard] = useState(false);
-  const [delaiSecondes, setDelaiSecondes] = useState(10);
+	const [delaiSecondes, setDelaiSecondes] = useState(10);
 	const [delaiMinutes, setDelaiMinutes] = useState(0);
 
 	// date + 1 day
@@ -181,22 +181,62 @@ export default function Editor() {
 					<h3>Entrez les dimensions du Pixelboard</h3>
 					<div id="options">
 						<div className="option">
-							<input className="panelInput" type="number" name="width" id="width" defaultValue={panelWidth} onChange={(e)=>{setPanelWidth(e.target.value);}} />
+							<input
+								className="panelInput"
+								type="number"
+								name="width"
+								id="width"
+								defaultValue={panelWidth}
+								onChange={(e) => {
+									setPanelWidth(e.target.value);
+								}}
+							/>
 							<span>Largeur</span>
 						</div>
 						<div className="option">
-							<input className="panelInput" type="number" name="height" id="height" defaultValue={panelWidth} onChange={(e)=>{setPanelHeight(e.target.value);}}/>
+							<input
+								className="panelInput"
+								type="number"
+								name="height"
+								id="height"
+								defaultValue={panelWidth}
+								onChange={(e) => {
+									setPanelHeight(e.target.value);
+								}}
+							/>
 							<span>Hauteur</span>
 						</div>
 					</div>
 					<h3>Delai de collaboration</h3>
 					<div id="options">
 						<div className="option">
-							<input className="panelInput" type="number" name="delaimn" id="delaimn" max="59" min="0" defaultValue={delaiMinutes} onChange={(e)=>{setDelaiMinutes(e.target.value);}}/>
+							<input
+								className="panelInput"
+								type="number"
+								name="delaimn"
+								id="delaimn"
+								max="59"
+								min="0"
+								defaultValue={delaiMinutes}
+								onChange={(e) => {
+									setDelaiMinutes(e.target.value);
+								}}
+							/>
 							<span>Minute(s)</span>
 						</div>
 						<div className="option">
-							<input className="panelInput" type="number" name="delaisec" id="delaisec" max="59" min="10" defaultValue={delaiSecondes} onChange={(e)=>{setDelaiSecondes(e.target.value);}}/>
+							<input
+								className="panelInput"
+								type="number"
+								name="delaisec"
+								id="delaisec"
+								max="59"
+								min="10"
+								defaultValue={delaiSecondes}
+								onChange={(e) => {
+									setDelaiSecondes(e.target.value);
+								}}
+							/>
 							<span>Seconde(s)</span>
 						</div>
 					</div>
@@ -209,7 +249,7 @@ export default function Editor() {
 								className="panelInputText"
 								selected={startDate}
 								onChange={(date) => setStartDate(date)}
-								dateFormat="dd/MM/yyyy"
+								dateFormat="yyyy-MM-dd"
 								minDate={startDate}
 							/>
 						</div>
@@ -230,7 +270,13 @@ export default function Editor() {
 			{hideOptions && (
 				<>
 					Fin du pixel board dans <Countdown date={startDate} renderer={renderer} />
-					<DrawingPanel width={panelWidth} height={panelHeight} selectedColor={selectedColor} delaiMin={delaiMinutes} delaiSec={delaiSecondes}/>
+					<DrawingPanel
+						width={panelWidth}
+						height={panelHeight}
+						selectedColor={selectedColor}
+						delaiMin={delaiMinutes}
+						delaiSec={delaiSecondes}
+					/>
 				</>
 			)}
 		</div>
