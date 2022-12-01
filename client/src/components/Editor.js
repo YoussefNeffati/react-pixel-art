@@ -41,6 +41,8 @@ export default function Editor() {
 			.then((data) => {
 				setNbPixelboard(data.length);
 			});
+		
+		
 
 		// verify if we have a current board
 		fetch("/currentboad")
@@ -131,7 +133,16 @@ export default function Editor() {
 				</div>
 			</div>
 			<span>
-				<button className="button">Voir tous les Pixelboards</button>
+				<button className="button"
+					onClick={(e) => {
+						e.preventDefault();
+						fetch("/boards")
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+              });
+					}
+					}>Voir tous les Pixelboards</button>
 			</span>
 			{isLogged && <h2>Aucun dessin est en cours veuillez créer un nouveau Pixelboard</h2>}
 			{isLogged && (
