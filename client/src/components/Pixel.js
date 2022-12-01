@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import "../styles/pixel.scss";
 
 export default function Pixel(props) {
-	const { selectedColor } = props;
+	const { col, line, selectedColor } = props;
 
 	const [pixelColor, setPixelColor] = useState("#fff");
 	const [oldColor, setOldColor] = useState(pixelColor);
 	const [canChangeColor, setCanChangeColor] = useState(true);
 
 	function applyColor() {
+		console.log("line,col", line, col);
 		setPixelColor(selectedColor);
 		setCanChangeColor(false);
-		console.log("selectedColor", selectedColor);
-		// call api to save color
+
+		// call API to save pixel
 	}
 
 	function changeColorOnHover() {
@@ -31,6 +32,7 @@ export default function Pixel(props) {
 	return (
 		<div
 			className="pixel"
+			id={line + "-" + col}
 			onClick={applyColor}
 			onMouseEnter={changeColorOnHover}
 			onMouseLeave={resetColor}

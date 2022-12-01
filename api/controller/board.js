@@ -15,7 +15,7 @@ exports.getboard = async (request, response) => {
 // get current borad by status false and finishedAt > now
 exports.getcurrentboad = async (request, response) => {
 	try {
-		var board = await boardModel.findOne({ statuts: false, finishedAt: { $gt: Date.now() } });
+		var board = await boardModel.findOne({ statuts: false, finishedAt: { $gt: Date.now() } }).populate("author");
 		if (!board) {
 			board = [];
 		}

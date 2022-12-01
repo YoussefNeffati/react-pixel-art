@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/editor.scss";
 import { CirclePicker } from "react-color";
 import DrawingPanel from "./DrawingPanel";
-import Countdown from "react-countdown";
 import DatePicker from "react-datepicker";
-
+import BoardInformations from "./BoardInformations";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Editor() {
@@ -12,8 +11,7 @@ export default function Editor() {
 	const [panelHeight, setPanelHeight] = useState(16);
 	const [hideOptions, setHideOptions] = useState(false);
 	const [beginDrawing, setBeginDrawing] = useState(false);
-	const [hideDrawingPanel, setHideDrawingPanel] = useState(true);
-	const [buttonText, setButtonText] = useState("Commencer à dessiner");
+	const [buttonText] = useState("Commencer à dessiner");
 	const [selectedColor, setColor] = useState("#f44336");
 	const [nbUsersInscrit, setNbUsersInscrit] = useState(0);
 	const [nbPixelboard, setNbPixelboard] = useState(0);
@@ -22,10 +20,13 @@ export default function Editor() {
 	const [createBoard, setCreateBoard] = useState(false);
 	const [delaiSecondes, setDelaiSecondes] = useState(10);
 	const [delaiMinutes, setDelaiMinutes] = useState(0);
+	const [author, setAuthor] = useState("");
+	const [title, setTitle] = useState("");
 
 	// date + 1 day
 	var today = new Date();
-	const [startDate, setStartDate] = useState(today.setDate(today.getDate() + 1));
+	const [endDate, setEndDate] = useState(today.setDate(today.getDate() + 1));
+	const [startDate, setStartDate] = useState(new Date());
 
 	useEffect(() => {
 		// get nb users inscrit
@@ -53,24 +54,11 @@ export default function Editor() {
 						setIsNotLogged(true);
 					}
 				} else {
+					setInfosBoard(data);
 					setBeginDrawing(true);
 				}
 			});
 	}, []);
-
-	const renderer = ({ days, hours, minutes, seconds, completed }) => {
-		if (completed) {
-			// Render a completed state
-			window.location.reload(false);
-		} else {
-			// Render a countdown
-			return (
-				<span>
-					{days} jours {hours} heures {minutes} minutes et {seconds} secondes
-				</span>
-			);
-		}
-	};
 
 	function showFormCreateBoard() {
 		setCreateBoard(true);
@@ -79,13 +67,24 @@ export default function Editor() {
 
 	function initializeDrawingPanel() {
 		setHideOptions(!hideOptions);
-		setHideDrawingPanel(!hideDrawingPanel);
-
-		buttonText === "Commencer à dessiner" ? setButtonText("reset") : setButtonText("Commencer à dessiner");
+		setBeginDrawing(false);
+		//buttonText === "Commencer à dessiner" ? setButtonText("reset") : setButtonText("Commencer à dessiner");
 	}
 
 	function changeColor(color) {
 		setColor(color.hex);
+	}
+
+	// aLL informatioN ABOUT THE BOARD
+	function setInfosBoard(data) {
+		console.log("data", data);
+		setAuthor(data.author.name);
+		setTitle(data.title);
+		setStartDate(data.createdAt);
+		setEndDate(data.finishedAt);
+		setPanelWidth(data.nLines);
+		setPanelHeight(data.nColumns);
+		setDelaiSecondes(data.delai);
 	}
 
 	return (
@@ -164,7 +163,7 @@ export default function Editor() {
 						})
 							.then((res) => res.json())
 							.then((data) => {
-								console.log("dataow", data);
+								setInfosBoard(data);
 								setCreateBoard(false);
 								alert("Pixel board créé avec succès!");
 								setBeginDrawing(true);
@@ -247,10 +246,10 @@ export default function Editor() {
 								id="dateFin"
 								name="dateFin"
 								className="panelInputText"
-								selected={startDate}
-								onChange={(date) => setStartDate(date)}
+								selected={endDate}
+								onChange={(date) => setEndDate(date)}
 								dateFormat="yyyy-MM-dd"
-								minDate={startDate}
+								minDate={endDate}
 							/>
 						</div>
 					</div>
@@ -266,19 +265,34 @@ export default function Editor() {
 			)}
 
 			{hideOptions && <CirclePicker color={selectedColor} onChangeComplete={changeColor} />}
-
-			{hideOptions && (
-				<>
-					Fin du pixel board dans <Countdown date={startDate} renderer={renderer} />
-					<DrawingPanel
-						width={panelWidth}
-						height={panelHeight}
-						selectedColor={selectedColor}
-						delaiMin={delaiMinutes}
-						delaiSec={delaiSecondes}
-					/>
-				</>
-			)}
+			<div className="row">
+				<div className="col-4">
+					{hideOptions && (
+						<BoardInformations
+							author={author}
+							title={title}
+							startDate={startDate}
+							endDate={endDate}
+							delaiSecondes={delaiSecondes}
+							width={panelWidth}
+							height={panelHeight}
+						/>
+					)}
+				</div>
+				<div className="col-8">
+					{hideOptions && (
+						<>
+							<DrawingPanel
+								width={panelWidth}
+								height={panelHeight}
+								selectedColor={selectedColor}
+								delaiMin={delaiMinutes}
+								delaiSec={delaiSecondes}
+							/>
+						</>
+					)}
+				</div>
+			</div>
 		</div>
 	);
 }
