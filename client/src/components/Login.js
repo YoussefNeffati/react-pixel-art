@@ -65,26 +65,31 @@ export default function Login() {
 
     // JSX code for login form
     const renderForm = (
-        <div className="form">
-            <form onSubmit={handleSubmit}>
-                <div className="input-container">
-                    <label>Username </label>
-                    <input type="text" name="uname" required />
-                    {renderErrorMessage("uname")}
-                </div>
-                <div className="input-container">
-                    <label>Password </label>
-                    <input type="password" name="pass" required />
-                    {renderErrorMessage("pass")}
-                </div>
-                <div className="button-container">
-                    <input type="submit" />
-                </div>
-            </form>
-            <div style={{ marginTop: '20px' }}>
-                <Link to="/inscription" style={{ textDecoration: 'none', color: '#30475e' }}>Pas de compte ? S'inscrire</Link>
-            </div>
+      <div className="form">
+        <form onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label class="label">Username </label>
+            <input type="text" laber="username" name="uname" required />
+            {renderErrorMessage("uname")}
+          </div>
+          <div className="input-container">
+            <label class="label">Password </label>
+            <input type="password" name="pass" required />
+            {renderErrorMessage("pass")}
+          </div>
+          <div className="button-container">
+            <input type="submit" />
+          </div>
+        </form>
+        <div style={{ marginTop: "20px" }}>
+          <Link
+            to="/inscription"
+            style={{ textDecoration: "none", color: "#30475e" }}
+          >
+            Pas de compte ? S'inscrire
+          </Link>
         </div>
+      </div>
     );
 
     return (
