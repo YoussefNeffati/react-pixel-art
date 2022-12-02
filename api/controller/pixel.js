@@ -41,16 +41,19 @@ exports.savepixel = async (request, response) => {
 // get one pixel by x, y and board id
 exports.getonepixel = async (request, response) => {
 	try {
-		const pixel = await pixelModel
+		var pixel = await pixelModel
 			.findOne({
 				x: request.body.x,
 				y: request.body.y,
 				board: request.body.board
 			})
 			.populate("user");
-		if (!pixel) response.status(404).send("No item found");
+		if (!pixel) {
+			pixel = {};
+		}
 		response.status(200).send(pixel);
 	} catch (error) {
 		response.status(500).send(error);
+		console.log("error", error);
 	}
 };

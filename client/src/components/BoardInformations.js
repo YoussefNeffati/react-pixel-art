@@ -34,7 +34,7 @@ export default function boardInformations(props) {
 				</b>
 			</span>
 			<span className="optionName">
-				Date de création: <b>{new Date(startDate).toLocaleDateString()}</b>
+				Date de création: <b>{new Date(startDate).toLocaleString()}</b>
 			</span>
 			<span className="optionName">
 				Délai de collaboration: <b>{Math.floor(delaiSecondes / 60)}</b> minute(s) et <b>{delaiSecondes % 60}</b> seconde(s)

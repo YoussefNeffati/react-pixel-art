@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/pixel.scss";
 import Popover from "@mui/material/Button";
 
@@ -11,6 +11,10 @@ export default function Pixel(props) {
 	const [isMouseEnter, setIsMouseEnter] = useState(false);
 	const [authorPixel, setAuthorPixel] = useState("Anonyme(non inscrit)");
 	const [datePixel, setDatePixel] = useState("");
+
+	useEffect(() => {
+		informationsPixel(true);
+	}, []);
 
 	function applyColor() {
 		setPixelColor(selectedColor);
@@ -36,8 +40,8 @@ export default function Pixel(props) {
 		setOldColor(pixelColor);
 		setPixelColor(selectedColor);
 		// display popover
-		if (pixelColor !== "#fff") {
-			informationsPixel();
+		if (pixelColor !== "#fff" && pixelColor) {
+			informationsPixel(false, true);
 			setIsMouseEnter(true);
 		}
 	}
@@ -52,7 +56,7 @@ export default function Pixel(props) {
 		setIsMouseEnter(false);
 	}
 
-	async function informationsPixel() {
+	async function informationsPixel(fillPixel = false, mouseEnter = false) {
 		await fetch("/getpixel", {
 			method: "POST",
 			headers: {
@@ -66,11 +70,16 @@ export default function Pixel(props) {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("data", data);
 				if (data.user) {
 					setAuthorPixel(data.user.name);
 				}
-				setDatePixel(new Date(data.createdAt).toString());
+				if (fillPixel) {
+					setPixelColor(data.color);
+				}
+				if (mouseEnter) {
+					setPixelColor(data.color);
+				}
+				setDatePixel(new Date(data.createdAt).toLocaleString());
 			});
 	}
 
@@ -84,21 +93,7 @@ export default function Pixel(props) {
 			style={{ backgroundColor: pixelColor, border: "1px solid black" }}
 		>
 			{isMouseEnter && (
-				<Popover
-					id="popover"
-					name="popover"
-					open={isMouseEnter}
-					anchorReference="anchorPosition"
-					anchorPosition={{ top: 100, left: 100 }}
-					anchorOrigin={{
-						vertical: "top",
-						horizontal: "left"
-					}}
-					transformOrigin={{
-						vertical: "top",
-						horizontal: "left"
-					}}
-				>
+				<Popover id="popover" name="popover" open={isMouseEnter}>
 					<div className="popover">
 						<div className="popover__header">
 							<h3>Informations du pixel</h3>
