@@ -14,7 +14,7 @@ export default function Pixel(props) {
 
 	useEffect(() => {
 		informationsPixel(true);
-	}, []);
+	});
 
 	function applyColor() {
 		setPixelColor(selectedColor);
@@ -101,6 +101,7 @@ export default function Pixel(props) {
 						<div className="popover__body">
 							<p>Author: {authorPixel}</p>
 							<p>Date de création: {datePixel}</p>
+							<p>Cliquez pour changer la couleur</p>
 						</div>
 					</div>
 				</Popover>
