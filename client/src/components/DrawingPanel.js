@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/drawingPanel.scss";
 import Row from "./Row";
 import Countdown from "react-countdown";
@@ -47,9 +47,6 @@ export default function DrawingPanel(props) {
 				{rows}
 			</div>
 			{hideCompteur && <Countdown date={Date.now() + delai} renderer={renderer} />}
-			{/* <button onClick={() => exportComponentAsPNG(panelRef)} className="button">
-        Export as PNG
-      </button> */}
 		</div>
 	);
 }

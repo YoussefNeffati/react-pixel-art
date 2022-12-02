@@ -1,6 +1,6 @@
-import React, { Component, useRef, useState } from "react";
+import React, { Component } from "react";
 import "../styles/boardInformations.scss";
-import Countdown from "react-countdown";
+import { Link } from "react-router-dom";
 
 export default class Board extends Component {
 	constructor(props) {
@@ -15,7 +15,6 @@ export default class Board extends Component {
 			.then((res) => res.json())
 			.then((data) => {
 				this.setState({ boardData: data });
-				console.log(data);
 			});
 	}
 
@@ -31,6 +30,13 @@ export default class Board extends Component {
 					<td>{boardData[i].nLines}</td>
 					<td>{new Date(boardData[i].createdAt).toLocaleString()}</td>
 					<td>{new Date(boardData[i].finishedAt).toLocaleString()}</td>
+					<td>
+						<button className="button">
+							<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
+								Voir plus
+							</Link>
+						</button>
+					</td>
 				</tr>
 			);
 		}
@@ -45,6 +51,7 @@ export default class Board extends Component {
 							<th>Nombre lignes</th>
 							<th>Date début</th>
 							<th>Date fin</th>
+							<th>Actions</th>
 						</tr>
 						{tab}
 					</tbody>

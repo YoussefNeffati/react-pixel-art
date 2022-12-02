@@ -5,7 +5,7 @@ import DrawingPanel from "./DrawingPanel";
 import DatePicker from "react-datepicker";
 import BoardInformations from "./BoardInformations";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Editor() {
 	const [panelWidth, setPanelWidth] = useState(16);
@@ -42,12 +42,6 @@ export default function Editor() {
 			.then((data) => {
 				setNbPixelboard(data.length);
 			});
-		//get All pixelborad created
-		fetch("/boards")
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-			});
 		// verify if we have a current board
 		fetch("/currentboad")
 			.then((res) => res.json())
@@ -74,8 +68,6 @@ export default function Editor() {
 	function initializeDrawingPanel() {
 		setHideOptions(!hideOptions);
 		setBeginDrawing(false);
-		//fillBoard();
-		//buttonText === "Commencer à dessiner" ? setButtonText("reset") : setButtonText("Commencer à dessiner");
 	}
 
 	function changeColor(color) {
@@ -93,19 +85,6 @@ export default function Editor() {
 		setDelaiSecondes(data.delai);
 		localStorage.setItem("currentboad", data._id);
 	}
-
-	// function fillBoard() {
-	// 	// get pixels of the current board
-	// 	fetch("/pixels/" + localStorage.getItem("currentboad"))
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			// fill the board
-	// 			data.forEach((pixel) => {
-	// 				document.getElementById(pixel.x + "-" + pixel.y).style.backgroundColor = pixel.color;
-	// 			});
-	// 		});
-	// }
-
 	return (
 		<div id="editor">
 			<h1>Pixel Editor</h1>
