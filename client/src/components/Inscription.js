@@ -79,12 +79,12 @@ export default function Inscription() {
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
-                    <label>Username </label>
+                    <label class="label">Username </label>
                     <input type="text" name="uname" required />
                     {renderErrorMessage("uname")}
                 </div>
                 <div className="input-container">
-                    <label>Password </label>
+                    <label class="label">Password </label>
                     <input type="password" name="pass" required />
                 </div>
                 <div className="button-container">
