@@ -2,20 +2,28 @@ import React, { Component } from "react";
 import DrawingPanel from "./DrawingPanel";
 import BoardInformations from "./BoardInformations";
 import "../styles/boardInformations.scss";
+import {useParams} from 'react-router-dom';
 
-export default class FinishBoard extends Component {
+
+
+function withParams(Component) {
+	return props => <Component {...props} params={useParams()} />;
+}
+
+class FinishBoard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			pixels: [],
 			board: {},
 			author: "",
-			boardId: "638949d3c902e0273cc7731e",
+			boardId: this.props.params.boardId,
 			selectedColor: "#f44336",
 			delaiSecondes: 10,
 			delaiMinutes: 0
 		};
 	}
+	
 	componentDidMount() {
 		this.getBoardData();
 	}
@@ -41,14 +49,14 @@ export default class FinishBoard extends Component {
 							startDate={this.state.board.createdAt}
 							endDate={this.state.board.finishedAt}
 							delaiSecondes={this.state.board.delai}
-							width={this.state.board.nlines}
-							height={this.state.board.ncolumns}
+							width={this.state.board.nLines}
+							height={this.state.board.nColumns}
 						/>
 					</div>
 					<div className="">
 						<DrawingPanel
-							width={this.state.board.nlines}
-							height={this.state.board.ncolumns}
+							width={this.state.board.nLines}
+							height={this.state.board.nColumns}
 							selectedColor={this.state.selectedColor}
 							delaiMin={this.state.delaiMinutes}
 							delaiSec={this.state.delaiSecondes}
@@ -59,3 +67,5 @@ export default class FinishBoard extends Component {
 		);
 	}
 }
+
+export default withParams(FinishBoard);

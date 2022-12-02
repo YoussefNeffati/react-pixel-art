@@ -30,7 +30,7 @@ export default function boardInformations(props) {
 			<span className="optionName">
 				Fin du pixel board dans:
 				<b>
-					<Countdown date={endDate} renderer={renderer} />
+					{new Date(endDate).toLocaleString()}
 				</b>
 			</span>
 			<span className="optionName">
@@ -41,14 +41,8 @@ export default function boardInformations(props) {
 			</span>
 			<h3>Dimensions </h3>
 			<div id="options">
-				<div className="option">
-					<input className="panelInput" type="number" name="width" id="width" defaultValue={width} readOnly />
-					<span>Largeur</span>
-				</div>
-				<div className="option">
-					<input className="panelInput" type="number" name="height" id="height" defaultValue={height} readOnly />
-					<span>Hauteur</span>
-				</div>
+					<span>Largeur : <b>{width}</b> pixels</span> <br></br>
+					<span>Hauteur : <b>{height}</b> pixels</span>
 			</div>
 		</div>
 	);

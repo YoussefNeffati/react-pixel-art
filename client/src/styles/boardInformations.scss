@@ -1,12 +1,13 @@
 @import "properties.scss";
 
 #boardInformations {
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
 	border: 1px solid $red;
 	border-radius: 0.25rem;
 	padding: 7%;
+	margin: 10%;
 }
 
 span.optionName {
