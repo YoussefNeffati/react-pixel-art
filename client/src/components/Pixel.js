@@ -39,8 +39,9 @@ export default function Pixel(props) {
 	function changeColorOnHover() {
 		setOldColor(pixelColor);
 		setPixelColor(selectedColor);
+
 		// display popover
-		if (pixelColor !== "#fff" && pixelColor) {
+		if (pixelColor !== "#fff") {
 			informationsPixel(false, true);
 			setIsMouseEnter(true);
 		}
@@ -73,10 +74,10 @@ export default function Pixel(props) {
 				if (data.user) {
 					setAuthorPixel(data.user.name);
 				}
-				if (fillPixel) {
+				if (data.color && fillPixel) {
 					setPixelColor(data.color);
 				}
-				if (mouseEnter) {
+				if (data.color && mouseEnter) {
 					setPixelColor(data.color);
 				}
 				setDatePixel(new Date(data.createdAt).toLocaleString());
