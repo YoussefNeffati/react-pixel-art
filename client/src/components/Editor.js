@@ -13,12 +13,12 @@ export default function Editor() {
 	const [hideOptions, setHideOptions] = useState(false);
 	const [beginDrawing, setBeginDrawing] = useState(false);
 	const [buttonText] = useState("Commencer à dessiner");
-	const [selectedColor, setColor] = useState("#f44336");
 	const [nbUsersInscrit, setNbUsersInscrit] = useState(0);
 	const [nbPixelboard, setNbPixelboard] = useState(0);
 	const [isLogged, setIsLogged] = useState(false);
 	const [isNotLogged, setIsNotLogged] = useState(false);
 	const [createBoard, setCreateBoard] = useState(false);
+	const [selectedColor, setColor] = useState("#f44336");
 	const [delaiSecondes, setDelaiSecondes] = useState(10);
 	const [delaiMinutes, setDelaiMinutes] = useState(0);
 	const [author, setAuthor] = useState("");

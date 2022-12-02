@@ -1,11 +1,16 @@
 const pixelModel = require("../models/pixel");
+const userModel = require("../models/user");
 
 // get pixel by board id
 exports.getpixel = async (request, response) => {
 	try {
-		const pixels = await pixelModel.find({ board: request.params.idboard });
-		if (!pixels) response.status(404).send("No item found");
-		response.status(200).send(pixels);
+		const boardAndPixels = await pixelModel.find({ board: request.params.idboard }).populate("board");
+		if (!boardAndPixels) response.status(404).send("No item found");
+		let boardAndPixelsDetails = {};
+		boardAndPixelsDetails.pixels = boardAndPixels;
+		boardAndPixelsDetails.board = boardAndPixels[0].board;
+		boardAndPixelsDetails.author = await userModel.findById(boardAndPixelsDetails.board.author);
+		response.status(200).send(boardAndPixelsDetails);
 	} catch (error) {
 		response.status(500).send(error);
 	}
