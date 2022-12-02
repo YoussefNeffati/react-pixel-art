@@ -31,11 +31,9 @@ export default class Board extends Component {
 					<td>{new Date(boardData[i].createdAt).toLocaleString()}</td>
 					<td>{new Date(boardData[i].finishedAt).toLocaleString()}</td>
 					<td>
-						<button className="button">
-							<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
-								Voir plus
-							</Link>
-						</button>
+						<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
+							<button className="button">Voir le board</button>
+						</Link>
 					</td>
 				</tr>
 			);

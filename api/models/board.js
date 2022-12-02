@@ -4,7 +4,7 @@ const Board = new Schema({
 	title: { type: String, required: true },
 	createdAt: { type: Date, default: Date.now },
 	finishedAt: { type: Date },
-	statuts: { type: Boolean, default: false },
+	statut: { type: Boolean, default: false },
 	nLines: { type: Number, default: 0 },
 	nColumns: { type: Number, default: 0 },
 	// delai en seconde

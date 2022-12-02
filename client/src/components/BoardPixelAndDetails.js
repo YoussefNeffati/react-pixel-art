@@ -1,20 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import DrawingPanel from "./DrawingPanel";
 import BoardInformations from "./BoardInformations";
 import "../styles/boardInformations.scss";
-import {useParams} from 'react-router-dom';
-
-
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function withParams(Component) {
-	return props => <Component {...props} params={useParams()} />;
+	return (props) => <Component {...props} params={useParams()} />;
 }
 
-class FinishBoard extends React.Component {
+class BoardPixelAndDetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			pixels: [],
 			board: {},
 			author: "",
 			boardId: this.props.params.boardId,
@@ -23,26 +21,31 @@ class FinishBoard extends React.Component {
 			delaiMinutes: 0
 		};
 	}
-	
+
 	componentDidMount() {
 		this.getBoardData();
 	}
 
 	getBoardData() {
-		fetch(`/boardAndPixels/${this.state.boardId}`)
+		fetch(`/board/${this.state.boardId}`)
 			.then((res) => res.json())
 			.then((data) => {
-				this.setState({ pixels: data.pixels, board: data.board, author: data.author.name });
-				console.log("data", data);
+				localStorage.setItem("currentboad", this.state.boardId);
+				this.setState({ board: data, author: data.author.name });
 			});
 	}
 
 	render() {
 		return (
 			<div id="detailsBoard">
-				<h1>Board</h1>
+				<h1>Board {this.state.board.title}</h1>
+				<span>
+					<Link to="/allBoard" style={{ textDecoration: "none", color: "white" }}>
+						<button className="button"> Voir tous les Pixelboards</button>
+					</Link>
+				</span>
 				<div className="row">
-					<div className="">
+					<div className="col-6">
 						<BoardInformations
 							author={this.state.author}
 							title={this.state.board.title}
@@ -51,13 +54,13 @@ class FinishBoard extends React.Component {
 							delaiSecondes={this.state.board.delai}
 							width={this.state.board.nLines}
 							height={this.state.board.nColumns}
+							statut={this.state.board.statut}
 						/>
 					</div>
-					<div className="">
+					<div className="col-6">
 						<DrawingPanel
 							width={this.state.board.nLines}
 							height={this.state.board.nColumns}
-							selectedColor={this.state.selectedColor}
 							delaiMin={this.state.delaiMinutes}
 							delaiSec={this.state.delaiSecondes}
 						/>
@@ -68,4 +71,4 @@ class FinishBoard extends React.Component {
 	}
 }
 
-export default withParams(FinishBoard);
+export default withParams(BoardPixelAndDetails);

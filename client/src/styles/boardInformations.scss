@@ -6,8 +6,8 @@
 	align-items: center;
 	border: 1px solid $red;
 	border-radius: 0.25rem;
-	padding: 7%;
-	margin: 10%;
+	padding: 2%;
+	margin: 1%;
 }
 
 span.optionName {
@@ -50,4 +50,8 @@ span.optionName {
 		background-color: transparent;
 		border-color: $red;
 	}
+}
+
+.row {
+	width: auto;
 }

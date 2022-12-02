@@ -23,6 +23,7 @@ export default function Editor() {
 	const [delaiMinutes, setDelaiMinutes] = useState(0);
 	const [author, setAuthor] = useState("");
 	const [title, setTitle] = useState("");
+	const [statut, setStatut] = useState(false);
 
 	// date + 1 day
 	var today = new Date();
@@ -79,10 +80,11 @@ export default function Editor() {
 		setAuthor(data.author.name);
 		setTitle(data.title);
 		setStartDate(data.createdAt);
-		setEndDate(data.finishedAt);
+		setEndDate(new Date(data.finishedAt));
 		setPanelWidth(data.nLines);
 		setPanelHeight(data.nColumns);
 		setDelaiSecondes(data.delai);
+		setStatut(data.statut);
 		localStorage.setItem("currentboad", data._id);
 	}
 	return (
@@ -94,9 +96,6 @@ export default function Editor() {
 						<div className="card border-left-info shadow h-100 py-2 panelInputText">
 							<div className="card-body">
 								<div className="row no-gutters align-items-center">
-									<div className="col-auto">
-										<i className="fa fa-user fa-2x"></i>
-									</div>
 									<div className="col mr-2">
 										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de joueurs</div>
 
@@ -112,9 +111,6 @@ export default function Editor() {
 						<div className="card border-left-info shadow h-100 py-2 panelInputText">
 							<div className="card-body">
 								<div className="row no-gutters align-items-center">
-									<div className="col-auto">
-										<i className="fa fa-bullhorn fa-2x"></i>
-									</div>
 									<div className="col mr-2">
 										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de Pixelboards</div>
 
@@ -129,20 +125,22 @@ export default function Editor() {
 				</div>
 			</div>
 			<span>
-				<button className="button">
-					<Link to="/allBoard" style={{ textDecoration: "none", color: "white" }}>
-						Voir tous les Pixelboards
-					</Link>
-				</button>
+				<Link to="/allBoard" style={{ textDecoration: "none", color: "white" }}>
+					<button className="button"> Voir tous les Pixelboards</button>
+				</Link>
 			</span>
-			{isLogged && <h2>Aucun dessin est en cours veuillez créer un nouveau Pixelboard</h2>}
+			{isLogged && <h2>Aucun Pixelboard est en cours veuillez créer un nouveau</h2>}
 			{isLogged && (
 				<button onClick={showFormCreateBoard} className="button">
 					Créer un nouveau Pixelboard
 				</button>
 			)}
-			{isNotLogged && <h2>Aucun dessin est en cours veuillez d'abord vous connecter pour pouvoir créer un nouveau Pixelboard </h2>}
-			{isNotLogged && <button className="button">Se connecter</button>}
+			{isNotLogged && <h2>Aucun Pixelboard est en cours veuillez d'abord vous connecter pour pouvoir créer un nouveau </h2>}
+			{isNotLogged && (
+				<Link className="navbar__item" to="/login">
+					<button className="button">Se connecter</button>
+				</Link>
+			)}
 
 			{createBoard && (
 				<form
@@ -268,7 +266,7 @@ export default function Editor() {
 
 			{hideOptions && <CirclePicker color={selectedColor} onChangeComplete={changeColor} />}
 			<div className="row">
-				<div className="col-4">
+				<div className="col-6">
 					{hideOptions && (
 						<BoardInformations
 							author={author}
@@ -278,10 +276,11 @@ export default function Editor() {
 							delaiSecondes={delaiSecondes}
 							width={panelWidth}
 							height={panelHeight}
+							statut={statut}
 						/>
 					)}
 				</div>
-				<div className="col-8">
+				<div className="col-6">
 					{hideOptions && (
 						<>
 							<DrawingPanel
