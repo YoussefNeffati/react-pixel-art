@@ -30,8 +30,13 @@ class BoardPixelAndDetails extends React.Component {
 		fetch(`http://localhost:8000/board/${this.state.boardId}`)
 			.then((res) => res.json())
 			.then((data) => {
+				console.log("data", data);
 				localStorage.setItem("currentboad", this.state.boardId);
-				this.setState({ board: data, author: data.author.name });
+				if (!data.author) {
+					this.setState({ board: data, author: "Admin" });
+				} else {
+					this.setState({ board: data, author: data.author.name });
+				}
 			});
 	}
 
