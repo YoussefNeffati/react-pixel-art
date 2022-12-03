@@ -2,11 +2,9 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/navbar.scss";
 
-let theme = "dark";
+let theme = localStorage.getItem("theme");
 
 const toggleTheme = () => {
-	console.log("theme", theme);
-
 	if (theme === "dark") {
 		document.body.style.background = "#e8e8e8";
 		document.body.style.color = "#222831";
@@ -14,6 +12,7 @@ const toggleTheme = () => {
 			document.getElementById("backgroundDarkLight").style.color = "#222831";
 		} catch (error) {}
 		theme = "light";
+		localStorage.setItem("theme", theme);
 	} else {
 		document.body.style.background = "#222831";
 		document.body.style.color = "#e8e8e8";
@@ -21,6 +20,7 @@ const toggleTheme = () => {
 			document.getElementById("backgroundDarkLight").style.color = "#e8e8e8";
 		} catch (error) {}
 		theme = "dark";
+		localStorage.setItem("theme", theme);
 	}
 };
 
@@ -70,6 +70,12 @@ export default function Navbar() {
 			<Link className="navbar__item" to="/">
 				Accueil
 			</Link>
+
+			{localStorage.getItem("username") !== null && (
+				<Link className="navbar__item" to="/account">
+					Mon compte
+				</Link>
+			)}
 
 			{localStorage.getItem("role") === "admin" && (
 				<Link className="navbar__item" to="/admin">

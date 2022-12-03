@@ -11,4 +11,6 @@ app.post("/savepixel", pixelController.savepixel);
 // get one pixel by x, y and board id
 app.post("/getpixel", pixelController.getonepixel);
 
+// number of pixels by user id
+app.get("/pixelsuser/:iduser", pixelController.getnumberofpixelsUser);
 module.exports = app;

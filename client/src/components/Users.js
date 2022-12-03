@@ -38,7 +38,7 @@ export default class Board extends Component {
 	};
 
 	render() {
-		const { userData, modalIsOpen, userToEdit, customStyles } = this.state;
+		const { userData, modalIsOpen, userToEdit } = this.state;
 		const tab = [];
 
 		for (let i = 0; i < userData.length; i++) {

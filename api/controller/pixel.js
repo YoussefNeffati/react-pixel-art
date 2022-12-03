@@ -63,3 +63,14 @@ exports.getonepixel = async (request, response) => {
 		console.log("error", error);
 	}
 };
+
+// number of pixels by user id
+
+exports.getnumberofpixelsUser = async (request, response) => {
+	try {
+		const pixels = await pixelModel.find({ user: request.params.iduser }).populate("board");
+		response.status(200).send(pixels);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+};

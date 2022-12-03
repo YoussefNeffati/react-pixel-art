@@ -11,6 +11,8 @@ import Board from "./components/Board";
 import BoardPixelAndDetails from "./components/BoardPixelAndDetails";
 import AdminParameters from "./components/AdminParameters";
 import Users from "./components/Users";
+import Account from "./components/Account";
+localStorage.setItem("theme", "dark");
 
 export default function App() {
 	return (
@@ -25,6 +27,7 @@ export default function App() {
 					<Route path="boardPixelAndDetails/:boardId" element={<BoardPixelAndDetails />} />
 					<Route path="admin" element={<AdminParameters />} />
 					<Route path="users" element={<Users />} />
+					<Route path="account" element={<Account />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

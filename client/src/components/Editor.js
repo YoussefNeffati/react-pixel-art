@@ -77,7 +77,12 @@ export default function Editor() {
 
 	// aLL informatioN ABOUT THE BOARD
 	function setInfosBoard(data) {
-		setAuthor(data.author.name);
+		if (data.author) {
+			setAuthor(data.author.name);
+		} else {
+			setAuthor("Anonyme");
+		}
+
 		setTitle(data.title);
 		setStartDate(data.createdAt);
 		setEndDate(new Date(data.finishedAt));
