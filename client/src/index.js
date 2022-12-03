@@ -9,6 +9,8 @@ import "./styles/App.scss";
 import Inscription from "./components/Inscription";
 import Board from "./components/Board";
 import BoardPixelAndDetails from "./components/BoardPixelAndDetails";
+import AdminParameters from "./components/AdminParameters";
+import Users from "./components/Users";
 
 export default function App() {
 	return (
@@ -21,6 +23,8 @@ export default function App() {
 					<Route path="inscription" element={<Inscription />} />
 					<Route path="allBoard" element={<Board />} />
 					<Route path="boardPixelAndDetails/:boardId" element={<BoardPixelAndDetails />} />
+					<Route path="admin" element={<AdminParameters />} />
+					<Route path="users" element={<Users />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

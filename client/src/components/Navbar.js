@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/navbar.scss";
 
 let theme = "dark";
@@ -25,10 +25,15 @@ const toggleTheme = () => {
 };
 
 export default function Navbar() {
+	const navigate = useNavigate();
+
 	const logout = () => {
 		localStorage.removeItem("username");
 		localStorage.removeItem("iduser");
 		localStorage.removeItem("currentboad");
+		localStorage.removeItem("role");
+		navigate("/");
+
 		window.location.reload();
 	};
 
@@ -65,6 +70,12 @@ export default function Navbar() {
 			<Link className="navbar__item" to="/">
 				Accueil
 			</Link>
+
+			{localStorage.getItem("role") === "admin" && (
+				<Link className="navbar__item" to="/admin">
+					Paramètres
+				</Link>
+			)}
 
 			{button}
 		</header>

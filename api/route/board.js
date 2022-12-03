@@ -17,4 +17,10 @@ app.get("/boards", boardController.getboards);
 // update statut board by id
 app.put("/updateboard/:id", boardController.updateboard);
 
+// delete board by id
+app.delete("/deleteboard/:id", boardController.deleteboard);
+
+// update infos board by id
+app.put("/updateinfosboard/:id", boardController.updateboardinfo);
+
 module.exports = app;

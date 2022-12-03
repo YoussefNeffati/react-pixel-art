@@ -41,6 +41,7 @@ export default function Login() {
 				} else {
 					setIsSubmitted(true);
 					localStorage.setItem("username", userData.name);
+					localStorage.setItem("role", userData.role);
 					localStorage.setItem("iduser", userData._id);
 					navigate("/");
 					window.location.reload();

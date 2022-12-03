@@ -12,4 +12,10 @@ app.get("/users", userController.getusers);
 // get user by id
 app.get("/users/:id", userController.getuser);
 
+// delete user
+app.delete("/user/:id", userController.deleteuser);
+
+// update user
+app.put("/user/:id", userController.updateuser);
+
 module.exports = app;

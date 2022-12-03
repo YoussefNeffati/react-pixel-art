@@ -61,3 +61,26 @@ exports.updateboard = async (request, response) => {
 		response.status(500).send(error);
 	}
 };
+
+// delete board by id and pixels
+exports.deleteboard = async (request, response) => {
+	try {
+		const board = await boardModel.findByIdAndDelete(request.params.id);
+		if (!board) response.status(404).send("No item found");
+		const pixels = await pixelModel.deleteMany({ board: board._id });
+		console.log("pixels", pixels);
+		response.status(200).send();
+	} catch (error) {
+		response.status(500).send(error);
+	}
+};
+
+// update informations board by id
+exports.updateboardinfo = async (request, response) => {
+	try {
+		const board = await boardModel.updateOne({ _id: request.params.id }, request.body);
+		response.status(200).send(board);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+};
