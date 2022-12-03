@@ -27,7 +27,7 @@ class BoardPixelAndDetails extends React.Component {
 	}
 
 	getBoardData() {
-		fetch(`/board/${this.state.boardId}`)
+		fetch(`http://localhost:8000/board/${this.state.boardId}`)
 			.then((res) => res.json())
 			.then((data) => {
 				localStorage.setItem("currentboad", this.state.boardId);

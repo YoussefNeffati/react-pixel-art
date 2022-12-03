@@ -32,19 +32,19 @@ export default function Editor() {
 
 	useEffect(() => {
 		// get nb users inscrit
-		fetch("/users")
+		fetch("http://localhost:8000/users")
 			.then((res) => res.json())
 			.then((data) => {
 				setNbUsersInscrit(data.length);
 			});
 		// get nb pixelboard created
-		fetch("/boards")
+		fetch("http://localhost:8000/boards")
 			.then((res) => res.json())
 			.then((data) => {
 				setNbPixelboard(data.length);
 			});
 		// verify if we have a current board
-		fetch("/currentboad")
+		fetch("http://localhost:8000/currentboad")
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.length === 0) {
@@ -146,7 +146,7 @@ export default function Editor() {
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
-						fetch("/saveboard", {
+						fetch("http://localhost:8000/saveboard", {
 							method: "POST",
 							headers: {
 								"Content-Type": "application/json"

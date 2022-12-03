@@ -1,13 +1,12 @@
-FROM node:10-alpine
+FROM node:18.12.1
 
 RUN mkdir -p /app
 WORKDIR /app
 
 COPY package.json /app
-COPY yarn.lock /app
+COPY package-lock.json /app
 COPY . /app
 
-RUN yarn global add nodemon
-RUN yarn install
+RUN npm install 
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

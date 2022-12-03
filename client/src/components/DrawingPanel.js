@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "../styles/drawingPanel.scss";
 import Row from "./Row";
 import Countdown from "react-countdown";

@@ -21,7 +21,7 @@ export default function Pixel(props) {
 		setCanChangeColor(false);
 
 		// call API to save pixel
-		fetch("/savepixel", {
+		fetch("http://localhost:8000/savepixel", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -58,7 +58,7 @@ export default function Pixel(props) {
 	}
 
 	async function informationsPixel(fillPixel = false, mouseEnter = false) {
-		await fetch("/getpixel", {
+		await fetch("http://localhost:8000/getpixel", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

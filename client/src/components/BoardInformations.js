@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/boardInformations.scss";
 import Countdown from "react-countdown";
-import { Link } from "react-router-dom";
 
 export default function boardInformations(props) {
 	const { width, height, title, startDate, author, endDate, delaiSecondes, statut } = props;
@@ -20,7 +19,7 @@ export default function boardInformations(props) {
 	};
 
 	function finishPixelBoard() {
-		fetch("/updateboard/" + localStorage.getItem("currentboad"), {
+		fetch("http://localhost:8000/updateboard/" + localStorage.getItem("currentboad"), {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json"

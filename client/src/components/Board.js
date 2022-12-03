@@ -11,7 +11,7 @@ export default class Board extends Component {
 	}
 
 	componentDidMount() {
-		fetch("/boards")
+		fetch("http://localhost:8000/boards")
 			.then((res) => res.json())
 			.then((data) => {
 				this.setState({ boardData: data });
