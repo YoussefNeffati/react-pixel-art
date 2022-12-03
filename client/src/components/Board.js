@@ -3,6 +3,7 @@ import "../styles/boardInformations.scss";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
+import Spinner from 'react-bootstrap/Spinner';
 
 export default class Board extends Component {
 	constructor(props) {
@@ -10,7 +11,8 @@ export default class Board extends Component {
 		this.state = {
 			boardData: [],
 			modalIsOpen: false,
-			boardToEdit: {}
+			boardToEdit: {},
+			spinner: true
 		};
 	}
 
@@ -18,6 +20,7 @@ export default class Board extends Component {
 		fetch("http://localhost:8000/boards")
 			.then((res) => res.json())
 			.then((data) => {
+				this.setState({ spinner: false });
 				this.setState({ boardData: data });
 			});
 	}
@@ -39,7 +42,7 @@ export default class Board extends Component {
 	};
 
 	render() {
-		const { boardData, boardToEdit, modalIsOpen } = this.state;
+		const { boardData, boardToEdit, modalIsOpen, spinner } = this.state;
 		const tab = [];
 
 		for (let i = 0; i < boardData.length; i++) {
@@ -96,6 +99,9 @@ export default class Board extends Component {
 						{tab}
 					</tbody>
 				</table>
+				<div style={{padding: "10%"}}>
+				{spinner &&<Spinner animation="border" variant="danger" size="lg"/>}
+				</div>
 				<Modal
 					isOpen={modalIsOpen}
 					onRequestClose={this.closeModal}
