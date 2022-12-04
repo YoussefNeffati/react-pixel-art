@@ -9,7 +9,6 @@ Nous avons trois profils utilisateurs :
  Créer un PixelBoard en spécifiant les propriétés dans un formulaire
 -  Modifier, Supprimer un PixelBoard
 - Afficher, trier, filtrer tous les PixelBoards
-
 2. Le client peut :
 - Se connecter / s'incrire
 - Voir le nombre d'utilisateur inscrits
@@ -18,7 +17,7 @@ Nous avons trois profils utilisateurs :
 - Modifier le dernier PixelBoard en cours de création
 - Créer un pixel board si aucun n'est en cours de création
 - Consulter les derniers PixelBoard terminés
-- Afficher, trier, filtrer tous les PixelBoards
+- Afficher, filtrer tous les PixelBoards
 
 3. Le visiteur peut:
 - s'inscrire
@@ -26,14 +25,13 @@ Nous avons trois profils utilisateurs :
 
 
 ## Démarrage et compilation
-### EN local
-Pour démarrer le serveur : se positionner sur le repertoire API sur l'invite de commande:
-
-- Taper la commande suivante pour intaller le node-modules et package-lock.json
-
+- Taper la commande suivante pour intaller le node-modules et package-lock.json côté client et api.
 ```bash
     npm install
 ```
+### EN local
+Pour démarrer le serveur : se positionner sur le repertoire API sur l'invite de commande:
+
 - Lancer la commande pour démarrer le serveur:
 ```bash
     node index.js
@@ -90,20 +88,30 @@ Ce projet est "open source".
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/MonCompte.png?raw=true)
 
 ## Fonctionnalités du projet
-L'utilisateur à la possibilité de :
-- Se connecter / s'incrire
-- Voir le nombre d'utilisateur inscrits
-- Voir le nombre de PixelBoard créés.
-- Voir la prévisualisation du dernier PixelBoard en cours de création
-- Modifier le dernier PixelBoard en cours de création
-- Créer un pixel board si aucun n'est en cours de création
-- Consulter les derniers PixelBoard terminés
-- Afficher, trier, filtrer tous les PixelBoards
+- Une interface simple et responsive permettant de naviguer dans les différentes pages de l'application,
+- Un utilisateur peut se connecter/ s'incrire
+- Il peut voir le nombre d'utilisateur inscrits
+- Il peut voir le nombre de PixelBoard créés.
+- Il peut voir la prévisualisation du dernier PixelBoard en cours de création
+- Il peut voir le dernier PixelBoard en cours de création
+- Il peut créer un pixel board si aucun n'est en cours de création
+- Il peut consulter les derniers PixelBoard terminés
+- Il peut  afficher, filtrer tous les PixelBoards
+- Il peut télécharger un pixels board en cours, terminé ou en prévisualisation.
+- Un utilsateur ayant un role admin peut créer un PixelBoard en spécifiant les propriétés dans un formulaire
+-  Un utilsateur ayant un role admin peut Modifier, Supprimer un PixelBoard
+- Un utilisateur a la possibilité de changer le thème de l'application 
+deux thèmes possible (un light et un dark) 
+- Le choix du thème sera sauvegardé dans le navigateur, si je recharge la page le thème est le même.
+- le site sera automatiquement proposé en mode dark
+- Toutes les opérations crud ont été réalisées côté back via des api rest.
+- La base de donnée est stoké en ligne.
 
-L'admin à la possibilité de :
-- Créer un PixelBoard en spécifiant les propriétés dans un formulaire
--  Modifier, Supprimer un PixelBoard
-- Afficher, trier, filtrer tous les PixelBoards
+## Bonus:
+
+SuperPixelBoard un PixelBoard qui affiche toutes les créations
+Export un PixelBoard en image (SVG si possible ou png)
+
 
 
 ## Versions
@@ -129,5 +137,5 @@ Pour la réalisation de ce projet, nous nous sommes ressourcées de :
 - https://www.bezkoder.com/react-node-express-mongodb-mern-stack/ pour le backend
 
 - https://reactjs.org/docs/getting-started.html pour la docummentation de react.
-
+-  react-jsonschema-form-validation
 - Les apports de cours donner par nos professeurs de ce cours. Mr François et Mr Hugo.
