@@ -4,7 +4,6 @@ import Spinner from "react-bootstrap/Spinner";
 import HeatMap from "react-heatmap-grid";
 
 export default function Heat() {
-	// const [data, setData] = useState([]);
 	const [spinner, setSpinner] = useState(true);
 	const [xLabels, setXLabels] = useState([]);
 	const [yLabels, setYLabels] = useState([]);
@@ -17,23 +16,25 @@ export default function Heat() {
 		await fetch("http://localhost:8000/getnumbersoftimes")
 			.then((res) => res.json())
 			.then((data) => {
-				setSpinner(false);
+				let abscisse = [];
+				let ordonnee = [];
 				for (let i = 0; i < data.length; i++) {
 					// verify if x exist in xLabels
-					if (!xLabels.includes(data[i].x)) {
-						xLabels.push(data[i].x);
+					if (!abscisse.includes(data[i].x)) {
+						// push x in xLabels to string
+						abscisse.push(data[i].x);
 					}
 					// verify if y exist in yLabels
-					if (!yLabels.includes(data[i].y)) {
-						yLabels.push(data[i].y);
+					if (!ordonnee.includes(data[i].y)) {
+						ordonnee.push(data[i].y);
 					}
 				}
 				let datas = [];
-				for (let i = 0; i < xLabels.length; i++) {
+				for (let i = 0; i < abscisse.length; i++) {
 					let newArray = [];
-					for (let j = 0; j < yLabels.length; j++) {
+					for (let j = 0; j < ordonnee.length; j++) {
 						for (let k = 0; k < data.length; k++) {
-							if (xLabels[i] === data[k].x && yLabels[j] === data[k].y) {
+							if (abscisse[i] === data[k].x && ordonnee[j] === data[k].y) {
 								newArray.push(data[k].count);
 							}
 						}
@@ -43,14 +44,9 @@ export default function Heat() {
 					}
 				}
 				setData(datas);
-				// delete , in xLabels
-				console.log('xLabels.join("")', xLabels.join(""));
-				setXLabels(
-					xLabels.map((x) => {
-						x.replace(",", "");
-					})
-				);
-				setYLabels(yLabels.map((y) => y.replace(",", "")));
+				setXLabels(abscisse.fill(0).map((_, i) => `${i}`));
+				setYLabels(ordonnee.fill(0).map((_, i) => `${i}`));
+				setSpinner(false);
 			});
 	}
 
