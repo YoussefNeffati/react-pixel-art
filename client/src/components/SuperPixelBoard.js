@@ -10,7 +10,7 @@ export default function BoardInProgressPrev() {
 	}, []);
 
 	function getLatestBoard() {
-		fetch("/allBoardsAndPixels")
+		fetch("http://localhost:8000/allBoardsAndPixels")
 			.then((res) => res.json())
 			.then((data) => {
 				setBoardInProgress(data);
