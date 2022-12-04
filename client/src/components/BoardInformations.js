@@ -7,7 +7,8 @@ export default function boardInformations(props) {
 	const renderer = ({ days, hours, minutes, seconds, completed }) => {
 		if (completed) {
 			// Render a completed state
-			window.location.reload(false);
+			finishPixelBoard();
+			window.location.reload();
 		} else {
 			// Render a countdown
 			return (

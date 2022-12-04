@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import "../styles/boardinprogressprev.scss";
 import { Link } from "react-router-dom";
 import DrawingPanel from "./DrawingPanel";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function BoardInProgressPrev() {
 	const [boardsInProgress, setBoardInProgress] = useState([]);
+	const [spinner, setSpinner] = useState(true);
 
 	useEffect(() => {
 		getLatestBoard();
 	}, []);
 
 	function getLatestBoard() {
-		fetch("/sixLastBoardsInProgress")
+		fetch("http://localhost:8000/sixLastBoardsInProgress")
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("data", data);
+				setSpinner(false);
 				setBoardInProgress(data);
 			});
 	}
@@ -42,13 +44,14 @@ export default function BoardInProgressPrev() {
 	return (
 		<div className="containerBoard">
 			<h1>
-				Les six derniers tableaux en cours{" "}
+				Les six derniers tableaux en cours{" "} <br></br>
 				<Link to="/allBoard/progress" style={{ textDecoration: "none", color: "white" }}>
-					<button className="button"> Choisir un pixelboard à dessiner</button>
+					<button className="button"> Voir tous les Pixelboards à dessiner</button>
 				</Link>
 			</h1>
 
 			<div className="sixboards">{boards}</div>
+			<div style={{ padding: "5%" }}>{spinner && <Spinner animation="border" variant="danger" size="lg" />}</div>
 		</div>
 	);
 }
