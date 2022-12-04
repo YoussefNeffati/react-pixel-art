@@ -152,7 +152,7 @@ Git : version non pertinente
 Les technologies utilisées sont :
 - React,
 - HTML
-- CSS
+- SCSS
 - JS
 - nodeJS
 - MongoDB
