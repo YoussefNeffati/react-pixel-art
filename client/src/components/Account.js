@@ -11,7 +11,7 @@ export default class Account extends Component {
 			userData: [],
 			theme: "dark",
 			nbrePixels: 0,
-			pixels: []
+			boardsDrawed: []
 		};
 	}
 	componentDidMount() {
@@ -26,8 +26,20 @@ export default class Account extends Component {
 		fetch("http://localhost:8000/pixelsuser/" + localStorage.getItem("iduser"))
 			.then((res) => res.json())
 			.then((data) => {
-				this.setState({ nbrePixels: data.length });
-				this.setState({ pixels: data });
+				// filter boards
+				let boards = [];
+				data.forEach((pixel) => {
+					let exist = false;
+					boards.forEach((board) => {
+						if (board._id === pixel.board._id) {
+							exist = true;
+						}
+					});
+					if (!exist) {
+						boards.push(pixel.board);
+					}
+				});
+				this.setState({ nbrePixels: data.length, boardsDrawed: boards });
 			});
 	}
 	toggleTheme = () => {
@@ -55,14 +67,15 @@ export default class Account extends Component {
 	};
 
 	render() {
-		const { userData, modalIsOpen, nbrePixels, pixels } = this.state;
+		const { userData, modalIsOpen, nbrePixels, boardsDrawed } = this.state;
 		const boards = [];
-		for (let i = 0; i < pixels.length; i++) {
+		console.log("boardsDrawed", boardsDrawed);
+		for (let i = 0; i < boardsDrawed.length; i++) {
 			boards.push(
 				<div>
 					<p>
-						{pixels[i].board.title}{" "}
-						<Link to={`/boardPixelAndDetails/${pixels[i].board._id}`} style={{ textDecoration: "none", color: "white" }}>
+						{boardsDrawed[i].title}{" "}
+						<Link to={`/boardPixelAndDetails/${boardsDrawed[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
 							<button className="buttonBoard">Voir le board</button>
 						</Link>
 					</p>
@@ -73,7 +86,7 @@ export default class Account extends Component {
 			<div id="">
 				<h1>Mon compte</h1>
 				<div className="row justify-content-center">
-					<div className="col-6" id="userInformations">
+					<div className="col-3" id="userInformations">
 						<h3>Mes informations</h3>
 						<div className="optionName">
 							Nom: <b>{userData.name}</b>
@@ -95,32 +108,28 @@ export default class Account extends Component {
 					</div>
 					<div className="col-6" id="userInformations">
 						<h3>Statistiques contribution</h3>
-						<div id="options">
-							<div className="option">
-								<div className="card border-left-info shadow h-100 py-2 panelInputText">
-									<div className="card-body">
-										<div className="row no-gutters align-items-center">
-											<div className="col mr-2">
-												<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre pixels dessinés</div>
+						<div id="userContrib">
+							<div className="card border-left-info shadow h-100  py-2 panelInput">
+								<div className="card-body">
+									<div className="row no-gutters align-items-center">
+										<div className="col mr-2">
+											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre pixels dessinés</div>
 
-												<div className="h5 mb-0 font-weight-bold text-gray-800">
-													<b>{nbrePixels}</b>
-												</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">
+												<b>{nbrePixels}</b>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div className="option">
-								<div className="card border-left-info shadow h-100 py-2 panelInputText">
-									<div className="card-body">
-										<div className="row no-gutters align-items-center">
-											<div className="col mr-2">
-												<div className="text-xs font-weight-bold text-info text-uppercase mb-1">PixelBoards Contribués</div>
+							<div className="card border-left-info shadow h-100 py-2 panelInput">
+								<div className="card-body">
+									<div className="row no-gutters align-items-center">
+										<div className="col mr-2">
+											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">PixelBoards Contribués</div>
 
-												<div className="h5 mb-0 font-weight-bold text-gray-800">
-													<b>{boards}</b>
-												</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">
+												<b>{boards}</b>
 											</div>
 										</div>
 									</div>
