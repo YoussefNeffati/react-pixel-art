@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import BoardInProgressPrev from "./BoardInProgressPrev";
 import BoardFinishedPrev from "./BoardFinishedPrev";
 import SuperPixelBoard from "./SuperPixelBoard";
+import Heatmaps from "./Heat";
 
 export default function Editor() {
 	const [panelWidth, setPanelWidth] = useState(16);
@@ -18,6 +19,8 @@ export default function Editor() {
 	const [colorTitleboardInProgress, setcolorTitleBoardInProgress] = useState("#f05454");
 	const [colorTitleboardFinished, setcolorTitleBoardFinished] = useState("rgb(232 232 232 / 18%)");
 	const [colorTitleSuperPixelboard, setcolorTitleSuperPixelboard] = useState("rgb(232 232 232 / 18%)");
+	const [heatmap, setHeatmap] = useState(false);
+	const [colorTitleHeatmap, setcolorTitleHeatmap] = useState("rgb(232 232 232 / 18%)");
 	const [boardInProgress, setBoardInProgress] = useState(true);
 	const [boardFinished, setBoardFinished] = useState(false);
 	const [superPixelboards, setSuperPixelboards] = useState(false);
@@ -65,8 +68,10 @@ export default function Editor() {
 		setBoardInProgress(true);
 		setBoardFinished(false);
 		setSuperPixelboards(false);
+		setHeatmap(false);
 		setcolorTitleBoardInProgress("#f05454");
 		setcolorTitleBoardFinished("rgb(232 232 232 / 18%)");
+		setcolorTitleHeatmap("rgb(232 232 232 / 18%)");
 		setcolorTitleSuperPixelboard("rgb(232 232 232 / 18%)");
 	}
 
@@ -74,8 +79,10 @@ export default function Editor() {
 		setBoardInProgress(false);
 		setBoardFinished(true);
 		setSuperPixelboards(false);
+		setHeatmap(false);
 		setcolorTitleBoardInProgress("rgb(232 232 232 / 18%)");
 		setcolorTitleBoardFinished("#f05454");
+		setcolorTitleHeatmap("rgb(232 232 232 / 18%)");
 		setcolorTitleSuperPixelboard("rgb(232 232 232 / 18%)");
 	}
 
@@ -83,9 +90,22 @@ export default function Editor() {
 		setBoardInProgress(false);
 		setBoardFinished(false);
 		setSuperPixelboards(true);
+		setHeatmap(false);
 		setcolorTitleBoardInProgress("rgb(232 232 232 / 18%)");
 		setcolorTitleBoardFinished("rgb(232 232 232 / 18%)");
+		setcolorTitleHeatmap("rgb(232 232 232 / 18%)");
 		setcolorTitleSuperPixelboard("#f05454");
+	}
+
+	function showHeatmap() {
+		setBoardInProgress(false);
+		setBoardFinished(false);
+		setSuperPixelboards(false);
+		setHeatmap(true);
+		setcolorTitleBoardInProgress("rgb(232 232 232 / 18%)");
+		setcolorTitleBoardFinished("rgb(232 232 232 / 18%)");
+		setcolorTitleSuperPixelboard("rgb(232 232 232 / 18%)");
+		setcolorTitleHeatmap("#f05454");
 	}
 
 	return (
@@ -226,19 +246,23 @@ export default function Editor() {
 			)}
 
 			<div className="row board">
-				<div className="col-4 boardStatus" onClick={showBoardInProgress} style={{ backgroundColor: colorTitleboardInProgress }}>
+				<div className="col-3 boardStatus" onClick={showBoardInProgress} style={{ backgroundColor: colorTitleboardInProgress }}>
 					Pixelboards en cours
 				</div>
-				<div className="col-4 boardStatus" onClick={showBoardFinished} style={{ backgroundColor: colorTitleboardFinished }}>
+				<div className="col-3 boardStatus" onClick={showBoardFinished} style={{ backgroundColor: colorTitleboardFinished }}>
 					Pixelboards terminés
 				</div>
-				<div className="col-4 boardStatus" onClick={showSuperPixelBoard} style={{ backgroundColor: colorTitleSuperPixelboard }}>
+				<div className="col-3 boardStatus" onClick={showSuperPixelBoard} style={{ backgroundColor: colorTitleSuperPixelboard }}>
 					SuperPixelboards
+				</div>
+				<div className="col-3 boardStatus" onClick={showHeatmap} style={{ backgroundColor: colorTitleHeatmap }}>
+					Heatmap
 				</div>
 			</div>
 			{boardInProgress && <BoardInProgressPrev />}
 			{boardFinished && <BoardFinishedPrev />}
 			{superPixelboards && <SuperPixelBoard />}
+			{heatmap && <Heatmaps />}
 		</div>
 	);
 }

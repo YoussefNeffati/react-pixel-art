@@ -74,3 +74,37 @@ exports.getnumberofpixelsUser = async (request, response) => {
 		response.status(500).send(error);
 	}
 };
+
+// count number of times that x and y are used
+exports.getnumbersoftimes = async (request, response) => {
+	try {
+		const pixels = await pixelModel.find();
+		let x = [];
+		let y = [];
+		let xAndY = [];
+		for (let i = 0; i < pixels.length; i++) {
+			x.push(pixels[i].x);
+			y.push(pixels[i].y);
+		}
+		for (let i = 0; i < x.length; i++) {
+			xAndY.push({ x: x[i], y: y[i] });
+		}
+		let count = 0;
+		let countXAndY = [];
+		for (let i = 0; i < xAndY.length; i++) {
+			for (let j = 0; j < xAndY.length; j++) {
+				if (xAndY[i].x === xAndY[j].x && xAndY[i].y === xAndY[j].y) {
+					count++;
+				}
+			}
+			countXAndY.push({ x: xAndY[i].x, y: xAndY[i].y, count: count });
+			count = 0;
+		}
+		// remove duplicates
+		let unique = countXAndY.filter((thing, index, self) => index === self.findIndex((t) => t.x === thing.x && t.y === thing.y));
+		console.log("unique", unique);
+		response.status(200).send(countXAndY);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+};
