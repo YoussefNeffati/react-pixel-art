@@ -7,7 +7,6 @@ import { exportComponentAsPNG } from "react-component-export-image";
 export default function DrawingPanel(props) {
 	const { width, height, selectedColor, delaiMin, delaiSec, prevProgress, prevPixels } = props;
 
-	console.log("width, height", width, height);
 	const panelRef = useRef();
 
 	const [hideCompteur, setHideCompteur] = useState(false);

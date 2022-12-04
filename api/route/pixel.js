@@ -13,4 +13,8 @@ app.post("/getpixel", pixelController.getonepixel);
 
 // number of pixels by user id
 app.get("/pixelsuser/:iduser", pixelController.getnumberofpixelsUser);
+
+// count number of times that x and y are used
+app.get("/getnumbersoftimes", pixelController.getnumbersoftimes);
+
 module.exports = app;
