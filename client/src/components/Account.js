@@ -72,7 +72,7 @@ export default class Account extends Component {
 		const boards = [];
 		for (let i = 0; i < boardsDrawed.length; i++) {
 			boards.push(
-				<div>
+				<div key={i}>
 					<p>
 						{boardsDrawed[i].title}{" "}
 						<Link to={`/boardPixelAndDetails/${boardsDrawed[i]._id}`} style={{ textDecoration: "none", color: "white" }}>

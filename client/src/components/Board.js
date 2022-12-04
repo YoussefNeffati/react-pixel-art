@@ -62,21 +62,14 @@ class Board extends Component {
 					<td>{new Date(boardData[i].finishedAt).toLocaleString()}</td>
 					<td>
 						<span>
-							{statut === "all" && (
-								<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
-									<button className="buttonBoard">Voir le board</button>
-								</Link>
-							)}
-							{statut === "finished" && (
-								<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
-									<button className="buttonBoard">Voir le board</button>
-								</Link>
-							)}
-							{statut === "progress" && (
+							{!boardData[i].statut && (
 								<Link to={`/draw/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
 									<button className="buttonBoard">Dessiner</button>
 								</Link>
 							)}
+							<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
+								<button className="buttonBoard">Voir le board</button>
+							</Link>
 
 							{localStorage.getItem("role") === "admin" && (
 								<>
