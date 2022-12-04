@@ -9,21 +9,34 @@ Nous avons trois profils utilisateurs :
 1. L'administrateur gère les utilisateurs ainsi que les PixelBoard. Il peut :
     - Créer un PixelBoard en spécifiant les propriétés dans un formulaire
     -  Modifier, Supprimer un PixelBoard
-    - Afficher, trier, filtrer tous les PixelBoards  
+    - Afficher, trier, filtrer tous les PixelBoards
+    - Terminer un pixelboard
 
 2. Le client peut :
     - Se connecter / s'incrire
     - Voir le nombre d'utilisateur inscrits
     - Voir le nombre de PixelBoard créés.
-    - Voir la prévisualisation du dernier PixelBoard en cours de création
-    - Modifier le dernier PixelBoard en cours de création
+    - Voir la prévisualisation des derniers PixelBoards en cours de création
+    - Voir la prévisualisation des derniers pixelsboards terminés
+    - Consulter tous les derniers PixelBoard terminés
+    - Consulter tous les pixelsboards en cours
+    - Choisir un pixelBoard en cours de création et y dessiner
     - Créer un pixel board si aucun n'est en cours de création
-    - Consulter les derniers PixelBoard terminés
     - Afficher, filtrer tous les PixelBoards
+    - Voir les informations d'une pixel dessiné( son auteur, sa date de création)
 
 3. Le visiteur peut:
     - s'inscrire
-    - visualiser le dernier pixelboad en cours.
+    - Voir le nombre d'utilisateur inscrits
+    - Voir le nombre de PixelBoard créés.
+    - Voir la prévisualisation des derniers PixelBoards en cours de création
+    - Voir la prévisualisation des derniers pixelsboards terminés
+    - Consulter tous les derniers PixelBoard terminés
+    - Consulter tous les pixelsboards en cours
+    - Afficher, filtrer tous les PixelBoards
+    - Voir les informations d'une pixel dessiné( son auteur, sa date de création)
+
+
 
 
 ## Lancer le projet
@@ -98,15 +111,18 @@ Ce projet est "open source".
 - Un utilisateur peut se connecter/ s'incrire
 - Il peut voir le nombre d'utilisateur inscrits
 - Il peut voir le nombre de PixelBoard créés.
-- Il peut voir la prévisualisation du dernier PixelBoard en cours de création
-- Il peut voir le dernier PixelBoard en cours de création
+- Il peut voir la prévisualisation des derniers PixelBoards en cours de création
+- Il peut voir la prévisualisation des derniers PixelBoards terminés
+- Il peut voir  tous les derniers PixelBoards en cours de création
+- Il peut voir  tous les derniers PixelBoards terminés
 - Il peut créer un pixel board si aucun n'est en cours de création
 - Il peut consulter les derniers PixelBoard terminés
+- Il peut voir les informations d'une pixel dessiné( son auteur, sa date de création)
 - Il peut  afficher, filtrer tous les PixelBoards
-- Un utilsateur ayant un role admin peut créer un PixelBoard en spécifiant les propriétés dans un formulaire
--  Un utilsateur ayant un role admin peut Modifier, Supprimer un PixelBoard
+- Un utilisateur ayant un role admin peut créer un PixelBoard en spécifiant les propriétés dans un formulaire
+-  Un utilisateur ayant un role admin peut Modifier, Supprimer un PixelBoard
 - Un utilisateur a la possibilité de changer le thème de l'application 
-deux thèmes possible (un light et un dark) 
+deux thèmes possibles (un light et un dark) 
 - Le choix du thème sera sauvegardé dans le navigateur, si je recharge la page le thème est le même.
 - le site sera automatiquement proposé en mode dark
 - Toutes les opérations crud ont été réalisées côté back via des api rest.
@@ -115,6 +131,7 @@ deux thèmes possible (un light et un dark)
 ## Bonus:
 
 - Un utilisateur peut télécharger un pixel board en cours, terminé ou en prévisualisation.
+- L'admin ou l'auteur d'un pixelboard peut terminer un pixelboard avant sa date de fin
 
 ## Versions
 Version de node : v14.17.6
