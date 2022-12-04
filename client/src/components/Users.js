@@ -68,6 +68,27 @@ export default class Board extends Component {
 		return (
 			<div>
 				<h1>Ici la liste des utilisateurs</h1>
+				<div className="search">
+					<input
+						className="panelInputText"
+						type="text"
+						name="name"
+						id="name"
+						placeholder="Rechercher un utilisateur"
+						onKeyDown={(e) => {
+							if (e.target.value.length > 0) {
+								fetch(`http://localhost:8000/searchuser/${e.target.value}`)
+									.then((res) => res.json())
+									.then((data) => {
+										this.setState({ userData: data });
+									});
+							} else {
+								// componentDidMount
+								this.componentDidMount();
+							}
+						}}
+					/>
+				</div>
 				<table id="boards">
 					<tbody>
 						<tr>

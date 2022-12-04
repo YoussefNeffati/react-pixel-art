@@ -55,3 +55,13 @@ exports.updateuser = async (request, response) => {
 		response.status(500).send(error);
 	}
 };
+
+// search user by name like %name%
+exports.searchuser = async (request, response) => {
+	try {
+		const user = await userModel.find({ name: { $regex: request.params.name, $options: "i" } });
+		response.status(200).send(user);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+};

@@ -23,4 +23,7 @@ app.delete("/deleteboard/:id", boardController.deleteboard);
 // update infos board by id
 app.put("/updateinfosboard/:id", boardController.updateboardinfo);
 
+// search board by name
+app.get("/searchboard/:name", boardController.searchboard);
+
 module.exports = app;

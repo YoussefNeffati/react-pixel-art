@@ -55,7 +55,6 @@ exports.getboards = async (request, response) => {
 exports.updateboard = async (request, response) => {
 	try {
 		const board = await boardModel.updateOne({ _id: request.params.id }, { statut: true });
-		console.log("board", board);
 		response.status(200).send(board);
 	} catch (error) {
 		response.status(500).send(error);
@@ -79,6 +78,16 @@ exports.deleteboard = async (request, response) => {
 exports.updateboardinfo = async (request, response) => {
 	try {
 		const board = await boardModel.updateOne({ _id: request.params.id }, request.body);
+		response.status(200).send(board);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+};
+
+// search board by name like %name%
+exports.searchboard = async (request, response) => {
+	try {
+		const board = await boardModel.find({ title: { $regex: request.params.name, $options: "i" } });
 		response.status(200).send(board);
 	} catch (error) {
 		response.status(500).send(error);

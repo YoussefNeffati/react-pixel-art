@@ -18,4 +18,7 @@ app.delete("/user/:id", userController.deleteuser);
 // update user
 app.put("/user/:id", userController.updateuser);
 
+// search user by name like %name%
+app.get("/searchuser/:name", userController.searchuser);
+
 module.exports = app;
