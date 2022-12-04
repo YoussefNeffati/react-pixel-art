@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../styles/boardinprogressprev.scss";
-import Countdown from "react-countdown";
 import { Link } from "react-router-dom";
 import DrawingPanel from "./DrawingPanel";
 
 export default function BoardInProgressPrev() {
-	const [boardInProgress, setBoardInProgress] = useState([]);
+	const [boardsInProgress, setBoardInProgress] = useState([]);
 
 	useEffect(() => {
 		getLatestBoard();
@@ -15,8 +14,29 @@ export default function BoardInProgressPrev() {
 		fetch("/sixLastBoardsInProgress")
 			.then((res) => res.json())
 			.then((data) => {
+				console.log("data", data);
 				setBoardInProgress(data);
 			});
+	}
+	let boards = [];
+
+	for (let i = 0; i < boardsInProgress.length; i++) {
+		const boardInProgress = boardsInProgress[i];
+		//localStorage.setItem("currentboad", boardInProgress._id);
+
+		boards.push(
+			<div className="col-3 board" key={i}>
+				<DrawingPanel
+					width={boardInProgress.board.nLines}
+					height={boardInProgress.board.nColumns}
+					prevProgress={true}
+					prevPixels={boardInProgress.pixels}
+				/>
+				<Link to={`/draw/${boardInProgress._id}`} style={{ textDecoration: "none", color: "white" }}>
+					<button className="buttonBoard">Dessiner sur ce pixelboard</button>
+				</Link>
+			</div>
+		);
 	}
 
 	return (
@@ -28,7 +48,7 @@ export default function BoardInProgressPrev() {
 				</Link>
 			</h1>
 
-			{<DrawingPanel width={boardInProgress.nrows} height={boardInProgress.ncols} prevProgress={true} prevPixels={boardInProgress.pixels} />}
+			<div className="sixboards">{boards}</div>
 		</div>
 	);
 }

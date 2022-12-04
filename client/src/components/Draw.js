@@ -56,7 +56,6 @@ export default function Draw() {
 						selectedColor={selectedColor}
 						delaiMin={board.delai / 60}
 						delaiSec={board.delai % 60}
-						prevProgress={false}
 					/>
 				</div>
 			</div>

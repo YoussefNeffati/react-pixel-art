@@ -8,7 +8,7 @@ export default function Row(props) {
 	let pixels = [];
 
 	// function with promise to get the color of the pixel
-	function getColorPixel(col) {
+	function getPixel(col) {
 		let pixel = prevPixels.find((pixel) => pixel.y === col);
 		if (pixel) {
 			return pixel;
@@ -20,7 +20,7 @@ export default function Row(props) {
 	for (let i = 0; i < width; i++) {
 		let pixel;
 		if (prevProgress && prevPixels.length > 0) {
-			pixel = getColorPixel(i);
+			pixel = getPixel(i);
 		}
 		pixels.push(<Pixel key={i} line={line} col={i} selectedColor={selectedColor} prevProgress={prevProgress} prevPixels={pixel} />);
 	}

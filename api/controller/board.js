@@ -1,6 +1,7 @@
 const boardModel = require("../models/board");
 const userModel = require("../models/user");
 const pixelModel = require("../models/pixel");
+const board = require("../models/board");
 
 // get board by id
 exports.getboard = async (request, response) => {
@@ -108,48 +109,14 @@ exports.getSixLastBoardsInProgress = async (request, response) => {
 			.limit(6)
 			.populate("author");
 
-		let ncols = 0;
-		let nrows = 0;
-		let gtRowfirst = boards[0].nLines;
-		let gtRowlast = 0;
-		let colToAdd = boards[0].nColumns;
-		let rowToAdd = 0;
-		let allPixels = [];
+		let boardsArray = [];
 		for (let i = 0; i < boards.length; i++) {
 			const board = boards[i];
-			if (i < 3) {
-				ncols = ncols + board.nColumns;
-				if (board.nLines > gtRowfirst) {
-					gtRowfirst = board.nLines;
-				}
-			} else {
-				if (board.nLines > gtRowlast) {
-					gtRowlast = board.nLines;
-				}
-			}
 			// get pixels by board
 			const pixels = await pixelModel.find({ board: board.id });
-			for (let j = 0; j < pixels.length; j++) {
-				const pixel = pixels[j];
-				if (i === 3) {
-					colToAdd = 0;
-				}
-				if (i > 0) {
-					pixel.y = pixel.y + colToAdd;
-					colToAdd = colToAdd + board.nColumns;
-				}
-				if (i > 2) {
-					pixel.x = pixel.x + gtRowfirst;
-				}
-				allPixels.push(pixel);
-			}
+			boardsArray.push({ board: board, pixels: pixels });
 		}
-		let boardAndPixels = {};
-		// boardAndPixels.boards = boards;
-		boardAndPixels.ncols = ncols;
-		boardAndPixels.nrows = gtRowfirst + gtRowlast;
-		boardAndPixels.pixels = allPixels;
-		response.status(200).send(boardAndPixels);
+		response.status(200).send(boardsArray);
 	} catch (error) {
 		response.status(500).send(error);
 	}
