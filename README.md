@@ -1,7 +1,12 @@
 # Pixel Art Projet Master 2 MBDS 2022 par DIALLO Fatoumata Binta, DIEYE Khadidiatou, NEFFATI Youssef, KHALIFA Hassen
+
+Lien de la vidéo démo : https://youtu.be/qUa_DrAAi1I
 ## Informations générales 
 Cette application intitulée **PIXELART** est une application  de dessin (pixel art) collaboratif.
 Dans cette application, chaque utilisateur peut colorier un unique pixel toutes les x minutes / secondes, en choisissant un nombre de couleur limité. Le dessin a une durée de vie, c'est à dire qu'à partir d'une date, il n'est plus possible de dessiner et le dessin est considéré comme terminé.
+
+## Informations générales
+
 
 ## Profil utilisateur
 Nous avons trois profils utilisateurs :
@@ -85,22 +90,26 @@ Cette précieuse application est le résultat d'un travail collaboratif entre le
 Ce projet est "open source".
 ## Pages du site
 ### Accueil
+#### PixelBoards en cours
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/accueil.PNG?raw=true)
+#### PixelBoards terminés
+![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/accueil2.png?raw=true)
+### SuperPixelBoards
+![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/superpixelboard.png?raw=true)
 
+### Draw
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/Dessiner.png?raw=true)
 
 ### Login/Inscription
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/Login.png?raw=true)
 
-### allBoard
+### Liste des Pixels Boards
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/ListPixels.PNG?raw=true)
 
-### boardPixelAndDetails
-![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/DetailPixel.png?raw=true)
-
-### admin
+### Admin
+#### Paramètres
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/PageAdmin.png?raw=true)
-
+#### Liste des Pixels Boards Admin
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/ListPixelsAdmin.png?raw=true)
 
 ### Mon compte
