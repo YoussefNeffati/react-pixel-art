@@ -2,7 +2,7 @@
 	margin-top: 20px;
 }
 
-.boardpixel{
+.boardpixel {
 	padding-bottom: 30%;
 }
 
@@ -12,19 +12,25 @@
 	justify-content: space-between;
 }
 
+.superPixel {
+	.pixel {
+		width: 1rem;
+		height: 1rem;
+	}
+}
+
 @media (max-width: 1800px) {
 	.sixboards {
 		display: grid;
 		grid-template-columns: auto auto;
 		justify-content: space-between;
 	}
-  }
+}
 
-  @media (max-width: 1220px) {
+@media (max-width: 1220px) {
 	.sixboards {
 		display: grid;
 		grid-template-columns: auto;
 		justify-content: center;
-		
 	}
-  }
+}
