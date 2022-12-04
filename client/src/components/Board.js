@@ -86,6 +86,27 @@ export default class Board extends Component {
 		return (
 			<div>
 				<h1>Ici la liste des boards créés</h1>
+				<div className="search">
+					<input
+						className="panelInputText"
+						type="text"
+						name="name"
+						id="name"
+						placeholder="Rechercher un board"
+						onKeyDown={(e) => {
+							if (e.target.value.length > 0) {
+								fetch(`http://localhost:8000/searchboard/${e.target.value}`)
+									.then((res) => res.json())
+									.then((data) => {
+										this.setState({ boardData: data });
+									});
+							} else {
+								// componentDidMount
+								this.componentDidMount();
+							}
+						}}
+					/>
+				</div>
 				<table id="boards">
 					<tbody>
 						<tr>
