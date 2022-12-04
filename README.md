@@ -96,7 +96,8 @@ Ce projet est "open source".
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/accueil2.PNG?raw=true)
 ### SuperPixelBoards
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/superpixelboard.PNG?raw=true)
-
+### Heatmap
+![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/heatmap.PNG?raw=true)
 ### Draw
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/Dessiner.png?raw=true)
 
@@ -114,6 +115,7 @@ Ce projet est "open source".
 
 ### Mon compte
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/MonCompte.png?raw=true)
+
 
 ## Fonctionnalités du projet
 - Une interface simple et responsive permettant de naviguer dans les différentes pages de l'application,

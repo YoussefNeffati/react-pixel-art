@@ -102,7 +102,7 @@ exports.getnumbersoftimes = async (request, response) => {
 		}
 		// remove duplicates
 		let unique = countXAndY.filter((thing, index, self) => index === self.findIndex((t) => t.x === thing.x && t.y === thing.y));
-		console.log("unique", unique);
+		
 		response.status(200).send(countXAndY);
 	} catch (error) {
 		response.status(500).send(error);
