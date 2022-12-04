@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import "../styles/drawingPanel.scss";
 import Row from "./Row";
 import Countdown from "react-countdown";
-//import { exportComponentAsPNG } from "react-component-export-image";
+import { exportComponentAsPNG } from "react-component-export-image";
 
 export default function DrawingPanel(props) {
 	const { width, height, selectedColor, delaiMin, delaiSec } = props;
@@ -47,6 +47,15 @@ export default function DrawingPanel(props) {
 				{rows}
 			</div>
 			{hideCompteur && <Countdown date={Date.now() + delai} renderer={renderer} />}
+			<button onClick={() => exportComponentAsPNG(panelRef)}  class="containerButton">
+				<span class="material-symbols-outlined">
+					save
+				</span>
+				<span>
+					TELECHARGER
+				</span>
+
+			</button>
 		</div>
 	);
 }
