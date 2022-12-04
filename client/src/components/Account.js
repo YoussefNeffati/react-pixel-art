@@ -109,7 +109,7 @@ export default class Account extends Component {
 					<div className="col-6" id="userInformations">
 						<h3>Statistiques contribution</h3>
 						<div id="userContrib">
-							<div className="card border-left-info shadow h-100  py-2 panelInput">
+							<div className="card border-left-info shadow py-2 panelInput">
 								<div className="card-body">
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
@@ -122,7 +122,7 @@ export default class Account extends Component {
 									</div>
 								</div>
 							</div>
-							<div className="card border-left-info shadow h-100 py-2 panelInput">
+							<div className="card border-left-info shadow py-2 panelInput">
 								<div className="card-body">
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
