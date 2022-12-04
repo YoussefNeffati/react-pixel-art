@@ -36,4 +36,7 @@ app.get("/sixLastBoardsFinished", boardController.getSixLastBoardsFinished);
 // get all boards by status
 app.get("/allBoardsByStatus/:statut", boardController.getAllBoardsByStatut);
 
+// get all boards ans pixels
+app.get("/allBoardsAndPixels", boardController.allBoardsAndPixels);
+
 module.exports = app;
