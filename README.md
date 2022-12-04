@@ -93,9 +93,9 @@ Ce projet est "open source".
 #### PixelBoards en cours
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/accueil.PNG?raw=true)
 #### PixelBoards terminés
-![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/accueil2.png?raw=true)
+![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/accueil2.PNG?raw=true)
 ### SuperPixelBoards
-![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/superpixelboard.png?raw=true)
+![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/superpixelboard.PNG?raw=true)
 
 ### Draw
 ![alt text](https://github.com/YoussefNeffati/react-pixel-art/blob/main/assetsReadme/Dessiner.png?raw=true)
