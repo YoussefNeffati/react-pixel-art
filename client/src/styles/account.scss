@@ -1,0 +1,65 @@
+@import "properties.scss";
+#userInformations {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid $red;
+	border-radius: 0.25rem;
+	padding: 2%;
+	margin: 1%;
+	div.optionName {
+		margin: 15px;
+	}
+}
+.row {
+	display: flex;
+	flex-wrap: nowrap;
+	.buttonAc {
+		font-size: 1rem;
+		background-color: #f05454;
+		color: #e8e8e8;
+		margin-top: 15px;
+		padding: 0.5rem 0.5rem;
+		border-radius: 0.25rem;
+		margin-left: 10px;
+		text-transform: uppercase;
+		border: 1px solid transparent;
+		transition: background-color 0.2s ease-in-out;
+		margin-bottom: 2rem;
+
+		&:hover {
+			cursor: pointer;
+			background-color: transparent;
+			border-color: $red;
+		}
+	}
+}
+
+.form-check {
+	display: flex;
+	justify-content: center;
+}
+
+#userContrib {
+	display: flex;
+	justify-content: space-between;
+}
+
+.panelInput {
+	height: auto;
+	width: 100%;
+	font-size: 2rem;
+	text-align: center;
+	background-color: $black;
+	color: $white;
+	border: 1px solid $grey;
+	border-radius: 0.25rem;
+	margin: 0 1rem 0.5rem 1rem;
+	padding-left: 1rem;
+
+	&:focus {
+		outline: none !important;
+		border-color: $red;
+		box-shadow: 0 0 0.5rem $grey;
+	}
+}

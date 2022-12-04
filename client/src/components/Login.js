@@ -7,7 +7,6 @@ async function callServer() {
 	let res = await axios.get("http://localhost:8000/users");
 
 	let data = res.data;
-	console.log(data);
 
 	return data;
 }
@@ -31,8 +30,6 @@ export default function Login() {
 		callServer().then((value) => {
 			const userData = value.find((user) => user.name === uname.value);
 
-			console.log(userData);
-
 			// Compare user info
 			if (userData) {
 				if (userData.password !== pass.value) {
@@ -41,6 +38,7 @@ export default function Login() {
 				} else {
 					setIsSubmitted(true);
 					localStorage.setItem("username", userData.name);
+					localStorage.setItem("role", userData.role);
 					localStorage.setItem("iduser", userData._id);
 					navigate("/");
 					window.location.reload();

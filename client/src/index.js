@@ -9,6 +9,12 @@ import "./styles/App.scss";
 import Inscription from "./components/Inscription";
 import Board from "./components/Board";
 import BoardPixelAndDetails from "./components/BoardPixelAndDetails";
+import AdminParameters from "./components/AdminParameters";
+import Users from "./components/Users";
+import Account from "./components/Account";
+import Draw from "./components/Draw";
+
+localStorage.setItem("theme", "dark");
 
 export default function App() {
 	return (
@@ -19,8 +25,12 @@ export default function App() {
 					<Route path="pixelArt" element={<DrawingPanel />} />
 					<Route path="login" element={<Login />} />
 					<Route path="inscription" element={<Inscription />} />
-					<Route path="allBoard" element={<Board />} />
+					<Route path="allBoard/:statut" element={<Board />} />
 					<Route path="boardPixelAndDetails/:boardId" element={<BoardPixelAndDetails />} />
+					<Route path="admin" element={<AdminParameters />} />
+					<Route path="users" element={<Users />} />
+					<Route path="account" element={<Account />} />
+					<Route path="draw/:idboard" element={<Draw />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

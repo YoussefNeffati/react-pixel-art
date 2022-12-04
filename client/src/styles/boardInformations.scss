@@ -6,8 +6,8 @@
 	align-items: center;
 	border: 1px solid $red;
 	border-radius: 0.25rem;
-	padding: 7%;
-	margin: 10%;
+	padding: 2%;
+	margin: 1%;
 }
 
 span.optionName {
@@ -49,5 +49,120 @@ span.optionName {
 		cursor: pointer;
 		background-color: transparent;
 		border-color: $red;
+	}
+}
+
+.row {
+	width: auto;
+}
+
+.buttonBoard {
+	font-size: 1rem;
+	background-color: #f05454;
+	color: #e8e8e8;
+	margin-top: 15px;
+	padding: 0.5rem 0.5rem;
+	border-radius: 0.25rem;
+	margin-left: 10px;
+	text-transform: uppercase;
+	border: 1px solid transparent;
+	transition: background-color 0.2s ease-in-out;
+	margin-bottom: 2rem;
+
+	&:hover {
+		cursor: pointer;
+		background-color: transparent;
+		border-color: $red;
+	}
+}
+
+#options {
+	display: flex;
+	margin-bottom: 1rem;
+	justify-content: center;
+
+	.option {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.panelInput {
+		height: 5rem;
+		width: 5rem;
+		font-size: 2rem;
+		text-align: center;
+		background-color: $black;
+		color: $white;
+		border: 1px solid $grey;
+		border-radius: 0.25rem;
+		margin: 0 1rem 0.5rem 1rem;
+		padding-left: 1rem;
+
+		&:focus {
+			outline: none !important;
+			border-color: $red;
+			box-shadow: 0 0 0.5rem $grey;
+		}
+	}
+
+	.panelInputText {
+		height: 5rem;
+		width: 20rem;
+		font-size: 2rem;
+		text-align: center;
+		background-color: $black;
+		color: $white;
+		border: 1px solid $grey;
+		border-radius: 0.25rem;
+		margin: 0 1rem 0.5rem 1rem;
+		padding-left: 1rem;
+
+		&:focus {
+			outline: none !important;
+			border-color: $red;
+			box-shadow: 0 0 0.5rem $grey;
+		}
+	}
+}
+
+.Modal {
+	position: absolute;
+	inset: 35% auto auto 50%;
+	border: 1px solid rgb(204, 204, 204);
+	background: rgb(34 40 49);
+	overflow: auto;
+	border-radius: 4px;
+	outline: none;
+	padding: 20px;
+	margin-right: -50%;
+	width: 60%;
+	color: white;
+	top: "50%";
+	left: "50%";
+	right: "auto";
+	bottom: "auto";
+	margin-right: "-50%";
+	transform: translate(-50%, -30%);
+}
+.Overlay {
+	position: fixed;
+	inset: 0px;
+	background-color: rgb(255 255 255 / 15%);
+}
+
+.panelInputText {
+	font-size: 2rem;
+	text-align: center;
+	background-color: $black;
+	width: 32%;
+	border: 1px solid $grey;
+	border-radius: 0.25rem;
+	margin: 0 1rem 0.5rem 1rem;
+	padding-left: 1rem;
+
+	&:focus {
+		outline: none !important;
+		border-color: $red;
+		box-shadow: 0 0 0.5rem $grey;
 	}
 }

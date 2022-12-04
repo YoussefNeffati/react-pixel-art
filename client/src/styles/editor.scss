@@ -6,8 +6,6 @@
 	border-radius: 1.25rem;
 	padding: 1rem 4rem 2rem 4rem;
 	margin-top: 2rem;
-
-	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
 
@@ -88,5 +86,22 @@
 
 	.circle-picker {
 		margin-bottom: 1.5rem !important;
+	}
+
+	.board {
+		.boardStatus {
+			font-size: 1.25rem;
+			color: #222831;
+			padding: 1rem 3rem;
+			text-transform: uppercase;
+			transition: background-color 0.2s ease-in-out;
+			margin-bottom: 2rem;
+
+			&:hover {
+				cursor: pointer;
+				background-color: #13c9f0;
+				color: #13c9f0;
+			}
+		}
 	}
 }

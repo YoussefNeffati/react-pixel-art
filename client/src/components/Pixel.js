@@ -3,7 +3,7 @@ import "../styles/pixel.scss";
 import Popover from "@mui/material/Button";
 
 export default function Pixel(props) {
-	const { col, line, selectedColor } = props;
+	const { col, line, selectedColor, prevProgress, prevPixels } = props;
 
 	const [pixelColor, setPixelColor] = useState("#fff");
 	const [oldColor, setOldColor] = useState(pixelColor);
@@ -14,14 +14,14 @@ export default function Pixel(props) {
 
 	useEffect(() => {
 		informationsPixel(true);
-	}, []);
+	});
 
 	function applyColor() {
 		setPixelColor(selectedColor);
 		setCanChangeColor(false);
 
 		// call API to save pixel
-		fetch("/savepixel", {
+		fetch("http://localhost:8000/savepixel", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -39,8 +39,9 @@ export default function Pixel(props) {
 	function changeColorOnHover() {
 		setOldColor(pixelColor);
 		setPixelColor(selectedColor);
+
 		// display popover
-		if (pixelColor !== "#fff" && pixelColor) {
+		if (pixelColor !== "#fff") {
 			informationsPixel(false, true);
 			setIsMouseEnter(true);
 		}
@@ -57,30 +58,34 @@ export default function Pixel(props) {
 	}
 
 	async function informationsPixel(fillPixel = false, mouseEnter = false) {
-		await fetch("/getpixel", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				x: line,
-				y: col,
-				board: localStorage.getItem("currentboad")
+		if (prevProgress && prevPixels) {
+			setPixelColor(prevPixels.color);
+		} else if (!prevProgress) {
+			await fetch("http://localhost:8000/getpixel", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					x: line,
+					y: col,
+					board: localStorage.getItem("currentboad")
+				})
 			})
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.user) {
-					setAuthorPixel(data.user.name);
-				}
-				if (fillPixel) {
-					setPixelColor(data.color);
-				}
-				if (mouseEnter) {
-					setPixelColor(data.color);
-				}
-				setDatePixel(new Date(data.createdAt).toLocaleString());
-			});
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.user) {
+						setAuthorPixel(data.user.name);
+					}
+					if (data.color && fillPixel) {
+						setPixelColor(data.color);
+					}
+					if (data.color && mouseEnter) {
+						setPixelColor(data.color);
+					}
+					setDatePixel(new Date(data.createdAt).toLocaleString());
+				});
+		}
 	}
 
 	return (
@@ -101,6 +106,7 @@ export default function Pixel(props) {
 						<div className="popover__body">
 							<p>Author: {authorPixel}</p>
 							<p>Date de création: {datePixel}</p>
+							<p>Cliquez pour changer la couleur</p>
 						</div>
 					</div>
 				</Popover>

@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../styles/editor.scss";
-import { CirclePicker } from "react-color";
-import DrawingPanel from "./DrawingPanel";
 import DatePicker from "react-datepicker";
-import BoardInformations from "./BoardInformations";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import BoardInProgressPrev from "./BoardInProgressPrev";
+import BoardFinishedPrev from "./BoardFinishedPrev";
 
 export default function Editor() {
 	const [panelWidth, setPanelWidth] = useState(16);
-	const [panelHeight, setPanelHeight] = useState(16);
-	const [hideOptions, setHideOptions] = useState(false);
-	const [beginDrawing, setBeginDrawing] = useState(false);
-	const [buttonText] = useState("Commencer à dessiner");
 	const [nbUsersInscrit, setNbUsersInscrit] = useState(0);
 	const [nbPixelboard, setNbPixelboard] = useState(0);
 	const [isLogged, setIsLogged] = useState(false);
+	const [noBoardInProgress, setNoBoardInProgress] = useState(true);
 	const [isNotLogged, setIsNotLogged] = useState(false);
 	const [createBoard, setCreateBoard] = useState(false);
-	const [selectedColor, setColor] = useState("#f44336");
-	const [delaiSecondes, setDelaiSecondes] = useState(10);
-	const [delaiMinutes, setDelaiMinutes] = useState(0);
-	const [author, setAuthor] = useState("");
-	const [title, setTitle] = useState("");
+	const [colorTitleboardInProgress, setcolorTitleBoardInProgress] = useState("#f05454");
+	const [colorTitleboardFinished, setcolorTitleBoardFinished] = useState("rgb(232 232 232 / 18%)");
+	const [boardInProgress, setBoardInProgress] = useState(true);
 
 	// date + 1 day
 	var today = new Date();
@@ -31,33 +25,31 @@ export default function Editor() {
 
 	useEffect(() => {
 		// get nb users inscrit
-		fetch("/users")
+		fetch("http://localhost:8000/users")
 			.then((res) => res.json())
 			.then((data) => {
 				setNbUsersInscrit(data.length);
 			});
 		// get nb pixelboard created
-		fetch("/boards")
+		fetch("http://localhost:8000/boards")
 			.then((res) => res.json())
 			.then((data) => {
 				setNbPixelboard(data.length);
 			});
+
 		// verify if we have a current board
-		fetch("/currentboad")
+		fetch("http://localhost:8000/currentboad")
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.length === 0) {
-					// verif if is logged
-					if (localStorage.getItem("username")) {
-						setIsLogged(true);
-					} else {
-						setIsNotLogged(true);
-					}
-				} else {
-					setInfosBoard(data);
-					setBeginDrawing(true);
-				}
+				setNoBoardInProgress(false);
 			});
+
+		// verif if is logged
+		if (localStorage.getItem("username")) {
+			setIsLogged(true);
+		} else {
+			setIsNotLogged(true);
+		}
 	}, []);
 
 	function showFormCreateBoard() {
@@ -65,26 +57,18 @@ export default function Editor() {
 		setIsLogged(false);
 	}
 
-	function initializeDrawingPanel() {
-		setHideOptions(!hideOptions);
-		setBeginDrawing(false);
+	function showBoardInProgress() {
+		setBoardInProgress(true);
+		setcolorTitleBoardInProgress("#f05454");
+		setcolorTitleBoardFinished("rgb(232 232 232 / 18%)");
 	}
 
-	function changeColor(color) {
-		setColor(color.hex);
+	function showBoardFinished() {
+		setBoardInProgress(false);
+		setcolorTitleBoardInProgress("rgb(232 232 232 / 18%)");
+		setcolorTitleBoardFinished("#f05454");
 	}
 
-	// aLL informatioN ABOUT THE BOARD
-	function setInfosBoard(data) {
-		setAuthor(data.author.name);
-		setTitle(data.title);
-		setStartDate(data.createdAt);
-		setEndDate(data.finishedAt);
-		setPanelWidth(data.nLines);
-		setPanelHeight(data.nColumns);
-		setDelaiSecondes(data.delai);
-		localStorage.setItem("currentboad", data._id);
-	}
 	return (
 		<div id="editor">
 			<h1>Pixel Editor</h1>
@@ -94,9 +78,6 @@ export default function Editor() {
 						<div className="card border-left-info shadow h-100 py-2 panelInputText">
 							<div className="card-body">
 								<div className="row no-gutters align-items-center">
-									<div className="col-auto">
-										<i className="fa fa-user fa-2x"></i>
-									</div>
 									<div className="col mr-2">
 										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de joueurs</div>
 
@@ -112,9 +93,6 @@ export default function Editor() {
 						<div className="card border-left-info shadow h-100 py-2 panelInputText">
 							<div className="card-body">
 								<div className="row no-gutters align-items-center">
-									<div className="col-auto">
-										<i className="fa fa-bullhorn fa-2x"></i>
-									</div>
 									<div className="col mr-2">
 										<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de Pixelboards</div>
 
@@ -128,27 +106,26 @@ export default function Editor() {
 					</div>
 				</div>
 			</div>
-			<span>
-				<button className="button">
-					<Link to="/allBoard" style={{ textDecoration: "none", color: "white" }}>
-						Voir tous les Pixelboards
-					</Link>
-				</button>
-			</span>
-			{isLogged && <h2>Aucun dessin est en cours veuillez créer un nouveau Pixelboard</h2>}
+			{isLogged && noBoardInProgress && <h2>Aucun Pixelboard est en cours veuillez créer un nouveau</h2>}
 			{isLogged && (
 				<button onClick={showFormCreateBoard} className="button">
 					Créer un nouveau Pixelboard
 				</button>
 			)}
-			{isNotLogged && <h2>Aucun dessin est en cours veuillez d'abord vous connecter pour pouvoir créer un nouveau Pixelboard </h2>}
-			{isNotLogged && <button className="button">Se connecter</button>}
+			{isNotLogged && noBoardInProgress && (
+				<h2>Aucun Pixelboard est en cours veuillez d'abord vous connecter pour pouvoir créer un nouveau </h2>
+			)}
+			{isNotLogged && (
+				<Link className="navbar__item" to="/login">
+					<button className="button">Se connecter</button>
+				</Link>
+			)}
 
 			{createBoard && (
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
-						fetch("/saveboard", {
+						fetch("http://localhost:8000/saveboard", {
 							method: "POST",
 							headers: {
 								"Content-Type": "application/json"
@@ -164,11 +141,10 @@ export default function Editor() {
 							})
 						})
 							.then((res) => res.json())
-							.then((data) => {
-								setInfosBoard(data);
+							.then(() => {
 								setCreateBoard(false);
 								alert("Pixel board créé avec succès!");
-								setBeginDrawing(true);
+								window.location.reload();
 							});
 					}}
 				>
@@ -195,49 +171,18 @@ export default function Editor() {
 							<span>Largeur</span>
 						</div>
 						<div className="option">
-							<input
-								className="panelInput"
-								type="number"
-								name="height"
-								id="height"
-								defaultValue={panelWidth}
-								onChange={(e) => {
-									setPanelHeight(e.target.value);
-								}}
-							/>
+							<input className="panelInput" type="number" name="height" id="height" defaultValue={panelWidth} />
 							<span>Hauteur</span>
 						</div>
 					</div>
 					<h3>Delai de collaboration</h3>
 					<div id="options">
 						<div className="option">
-							<input
-								className="panelInput"
-								type="number"
-								name="delaimn"
-								id="delaimn"
-								max="59"
-								min="0"
-								defaultValue={delaiMinutes}
-								onChange={(e) => {
-									setDelaiMinutes(e.target.value);
-								}}
-							/>
+							<input className="panelInput" type="number" name="delaimn" id="delaimn" max="59" min="0" defaultValue="0" />
 							<span>Minute(s)</span>
 						</div>
 						<div className="option">
-							<input
-								className="panelInput"
-								type="number"
-								name="delaisec"
-								id="delaisec"
-								max="59"
-								min="10"
-								defaultValue={delaiSecondes}
-								onChange={(e) => {
-									setDelaiSecondes(e.target.value);
-								}}
-							/>
+							<input className="panelInput" type="number" name="delaisec" id="delaisec" max="59" min="10" defaultValue="10" />
 							<span>Seconde(s)</span>
 						</div>
 					</div>
@@ -260,41 +205,17 @@ export default function Editor() {
 					</button>
 				</form>
 			)}
-			{beginDrawing && (
-				<button onClick={initializeDrawingPanel} className="button">
-					{buttonText}
-				</button>
-			)}
 
-			{hideOptions && <CirclePicker color={selectedColor} onChangeComplete={changeColor} />}
-			<div className="row">
-				<div className="col-4">
-					{hideOptions && (
-						<BoardInformations
-							author={author}
-							title={title}
-							startDate={startDate}
-							endDate={endDate}
-							delaiSecondes={delaiSecondes}
-							width={panelWidth}
-							height={panelHeight}
-						/>
-					)}
+			<div className="row board">
+				<div className="col-6 boardStatus" onClick={showBoardInProgress} style={{ backgroundColor: colorTitleboardInProgress }}>
+					Pixelboards en cours
 				</div>
-				<div className="col-8">
-					{hideOptions && (
-						<>
-							<DrawingPanel
-								width={panelWidth}
-								height={panelHeight}
-								selectedColor={selectedColor}
-								delaiMin={delaiMinutes}
-								delaiSec={delaiSecondes}
-							/>
-						</>
-					)}
+				<div className="col-6 boardStatus" onClick={showBoardFinished} style={{ backgroundColor: colorTitleboardFinished }}>
+					Pixelboards terminés
 				</div>
 			</div>
+			{boardInProgress && <BoardInProgressPrev />}
+			{!boardInProgress && <BoardFinishedPrev />}
 		</div>
 	);
 }

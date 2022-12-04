@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "../styles/drawingPanel.scss";
 import Row from "./Row";
 import Countdown from "react-countdown";
-//import { exportComponentAsPNG } from "react-component-export-image";
+import { exportComponentAsPNG } from "react-component-export-image";
 
 export default function DrawingPanel(props) {
-	const { width, height, selectedColor, delaiMin, delaiSec } = props;
+	const { width, height, selectedColor, delaiMin, delaiSec, prevProgress, prevPixels } = props;
 
 	const panelRef = useRef();
 
@@ -33,8 +33,22 @@ export default function DrawingPanel(props) {
 
 	let rows = [];
 
+	// filter the pixels of the board in progress that are in the current line
+	function getPixels(line) {
+		let pixels = prevPixels.filter((pixel) => pixel.x === line);
+		if (pixels) {
+			return pixels;
+		} else {
+			return [];
+		}
+	}
+
 	for (let i = 0; i < height; i++) {
-		rows.push(<Row key={i} line={i} width={width} selectedColor={selectedColor} />);
+		let pixels;
+		if (prevProgress) {
+			pixels = getPixels(i);
+		}
+		rows.push(<Row key={i} line={i} width={width} selectedColor={selectedColor} prevProgress={prevProgress} prevPixels={pixels} />);
 	}
 
 	function handleClick() {
@@ -47,6 +61,10 @@ export default function DrawingPanel(props) {
 				{rows}
 			</div>
 			{hideCompteur && <Countdown date={Date.now() + delai} renderer={renderer} />}
+			<button onClick={() => exportComponentAsPNG(panelRef)} className="containerButton">
+				<span className="material-symbols-outlined">save</span>
+				<span>TELECHARGER</span>
+			</button>
 		</div>
 	);
 }
