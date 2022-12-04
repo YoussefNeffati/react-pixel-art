@@ -18,6 +18,7 @@ export default function BoardInProgressPrev() {
 			.then((data) => {
 				setSpinner(false);
 				setBoardInProgress(data);
+				console.log(data)
 			});
 	}
 	let boards = [];
@@ -27,14 +28,14 @@ export default function BoardInProgressPrev() {
 		//localStorage.setItem("currentboad", boardInProgress._id);
 
 		boards.push(
-			<div className="board" key={i}>
+			<div className="boardpixel" key={i}>
 				<DrawingPanel
 					width={boardInProgress.board.nLines}
 					height={boardInProgress.board.nColumns}
 					prevProgress={true}
 					prevPixels={boardInProgress.pixels}
 				/>
-				<Link to={`/draw/${boardInProgress._id}`} style={{ textDecoration: "none", color: "white" }}>
+				<Link to={`/draw/${boardInProgress.board._id}`} style={{ textDecoration: "none", color: "white" }}>
 					<button className="buttonBoard">Dessiner sur ce pixelboard</button>
 				</Link>
 			</div>

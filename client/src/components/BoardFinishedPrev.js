@@ -26,7 +26,7 @@ export default function BoardInProgressPrev() {
 		const boardFinished = boardsFinished[i];
 
 		boards.push(
-			<div className="board" key={i}>
+			<div className="boardpixel" key={i}>
 				<DrawingPanel
 					width={boardFinished.board.nLines}
 					height={boardFinished.board.nColumns}

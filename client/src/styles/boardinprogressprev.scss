@@ -2,8 +2,29 @@
 	margin-top: 20px;
 }
 
+.boardpixel{
+	padding-bottom: 30%;
+}
+
 .sixboards {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: auto auto auto;
 	justify-content: space-between;
 }
+
+@media (max-width: 1800px) {
+	.sixboards {
+		display: grid;
+		grid-template-columns: auto auto;
+		justify-content: space-between;
+	}
+  }
+
+  @media (max-width: 1220px) {
+	.sixboards {
+		display: grid;
+		grid-template-columns: auto;
+		justify-content: center;
+		
+	}
+  }
