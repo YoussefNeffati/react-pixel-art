@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 import BoardInformations from "./BoardInformations";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import BoardInProgressPrev from "./BoardInProgressPrev";
+import BoardFinishedPrev from "./BoardFinishedPrev";
 
 export default function Editor() {
 	const [panelWidth, setPanelWidth] = useState(16);
@@ -24,6 +26,9 @@ export default function Editor() {
 	const [author, setAuthor] = useState("");
 	const [title, setTitle] = useState("");
 	const [statut, setStatut] = useState(false);
+	const [colorTitleboardInProgress, setcolorTitleBoardInProgress] = useState("#f05454");
+	const [colorTitleboardFinished, setcolorTitleBoardFinished] = useState("rgb(232 232 232 / 18%)");
+	const [boardInProgress, setBoardInProgress] = useState(true);
 
 	// date + 1 day
 	var today = new Date();
@@ -92,6 +97,19 @@ export default function Editor() {
 		setStatut(data.statut);
 		localStorage.setItem("currentboad", data._id);
 	}
+
+	function showBoardInProgress() {
+		setBoardInProgress(true);
+		setcolorTitleBoardInProgress("#f05454");
+		setcolorTitleBoardFinished("rgb(232 232 232 / 18%)");
+	}
+
+	function showBoardFinished() {
+		setBoardInProgress(false);
+		setcolorTitleBoardInProgress("rgb(232 232 232 / 18%)");
+		setcolorTitleBoardFinished("#f05454");
+	}
+
 	return (
 		<div id="editor">
 			<h1>Pixel Editor</h1>
@@ -130,7 +148,7 @@ export default function Editor() {
 				</div>
 			</div>
 			<span>
-				<Link to="/allBoard" style={{ textDecoration: "none", color: "white" }}>
+				<Link to="/allBoard/all" style={{ textDecoration: "none", color: "white" }}>
 					<button className="button"> Voir tous les Pixelboards</button>
 				</Link>
 			</span>
@@ -299,6 +317,17 @@ export default function Editor() {
 					)}
 				</div>
 			</div>
+
+			<div className="row board">
+				<div className="col-6 boardStatus" onClick={showBoardInProgress} style={{ backgroundColor: colorTitleboardInProgress }}>
+					Pixelboards en cours
+				</div>
+				<div className="col-6 boardStatus" onClick={showBoardFinished} style={{ backgroundColor: colorTitleboardFinished }}>
+					Pixelboards terminés
+				</div>
+			</div>
+			{boardInProgress && <BoardInProgressPrev />}
+			{!boardInProgress && <BoardFinishedPrev />}
 		</div>
 	);
 }

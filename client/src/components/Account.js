@@ -11,6 +11,7 @@ export default class Account extends Component {
 			userData: [],
 			theme: "dark",
 			nbrePixels: 0,
+			nbreBoard: 0,
 			boardsDrawed: []
 		};
 	}
@@ -39,7 +40,7 @@ export default class Account extends Component {
 						boards.push(pixel.board);
 					}
 				});
-				this.setState({ nbrePixels: data.length, boardsDrawed: boards });
+				this.setState({ nbrePixels: data.length, boardsDrawed: boards, nbreBoard: boards.length });
 			});
 	}
 	toggleTheme = () => {
@@ -67,7 +68,7 @@ export default class Account extends Component {
 	};
 
 	render() {
-		const { userData, modalIsOpen, nbrePixels, boardsDrawed } = this.state;
+		const { userData, modalIsOpen, nbrePixels, nbreBoard, boardsDrawed } = this.state;
 		const boards = [];
 		console.log("boardsDrawed", boardsDrawed);
 		for (let i = 0; i < boardsDrawed.length; i++) {
@@ -113,10 +114,19 @@ export default class Account extends Component {
 								<div className="card-body">
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
-											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre pixels dessinés</div>
+											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre pixel(s) dessiné(s)</div>
 
 											<div className="h5 mb-0 font-weight-bold text-gray-800">
 												<b>{nbrePixels}</b>
+											</div>
+										</div>
+									</div>
+									<div className="row no-gutters align-items-center">
+										<div className="col mr-2">
+											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre board(s) contribué(s)</div>
+
+											<div className="h5 mb-0 font-weight-bold text-gray-800">
+												<b>{nbreBoard}</b>
 											</div>
 										</div>
 									</div>
@@ -126,7 +136,9 @@ export default class Account extends Component {
 								<div className="card-body">
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
-											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">PixelBoards Contribués</div>
+											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">
+												Liste pixelBoard(s) Contribué(s)
+											</div>
 
 											<div className="h5 mb-0 font-weight-bold text-gray-800">
 												<b>{boards}</b>

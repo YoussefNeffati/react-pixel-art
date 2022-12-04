@@ -3,25 +3,33 @@ import "../styles/boardInformations.scss";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
+import { useParams } from "react-router-dom";
 
-export default class Board extends Component {
+function withParams(Component) {
+	return (props) => <Component {...props} params={useParams()} />;
+}
+
+class Board extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			boardData: [],
 			modalIsOpen: false,
 			boardToEdit: {},
-			spinner: true
+			spinner: true,
+			statut: this.props.params.statut
 		};
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:8000/boards")
+		console.log("this.state.statut", this.state.statut);
+		fetch("http://localhost:8000/allBoardsByStatus/" + this.state.statut)
 			.then((res) => res.json())
 			.then((data) => {
 				this.setState({ spinner: false });
 				this.setState({ boardData: data });
+				console.log("boardData", this.boardData);
 			});
 	}
 
@@ -42,7 +50,7 @@ export default class Board extends Component {
 	};
 
 	render() {
-		const { boardData, boardToEdit, modalIsOpen, spinner } = this.state;
+		const { boardData, boardToEdit, modalIsOpen, spinner, statut } = this.state;
 		const tab = [];
 
 		for (let i = 0; i < boardData.length; i++) {
@@ -85,7 +93,10 @@ export default class Board extends Component {
 		}
 		return (
 			<div>
-				<h1>Ici la liste des boards créés</h1>
+				{statut === "all" && <h1>Ici la liste de tous les boards créés</h1>}
+				{statut === "finished" && <h1>Ici la liste de tous les boards terminés</h1>}
+				{statut === "progress" && <h1>Ici la liste de tous les boards en cours</h1>}
+
 				<div className="search">
 					<input
 						className="panelInputText"
@@ -95,7 +106,7 @@ export default class Board extends Component {
 						placeholder="Rechercher un board"
 						onKeyDown={(e) => {
 							if (e.target.value.length > 0) {
-								fetch(`http://localhost:8000/searchboard/${e.target.value}`)
+								fetch(`http://localhost:8000/searchboard/${e.target.value}/${statut}`)
 									.then((res) => res.json())
 									.then((data) => {
 										this.setState({ boardData: data });
@@ -106,6 +117,45 @@ export default class Board extends Component {
 							}
 						}}
 					/>
+				</div>
+				<div>
+					<span className="buttonslist">
+						<Link to="/allBoard/all" style={{ textDecoration: "none", color: "white" }}>
+							<button
+								className="buttonBoard"
+								onClick={() => {
+									this.componentDidMount();
+									window.location.href = "/allBoard/all";
+								}}
+							>
+								Voir tous les Pixelboards
+							</button>
+						</Link>
+						<Link to="/allBoard/progress" style={{ textDecoration: "none", color: "white" }}>
+							<button
+								className="buttonBoard"
+								onClick={() => {
+									this.componentDidMount();
+									window.location.href = "/allBoard/progress";
+								}}
+							>
+								{" "}
+								Voir tous les Pixelboards en cours
+							</button>
+						</Link>
+						<Link to="/allBoard/finished" style={{ textDecoration: "none", color: "white" }}>
+							<button
+								className="buttonBoard"
+								onClick={() => {
+									this.componentDidMount();
+									window.location.href = "/allBoard/finished";
+								}}
+							>
+								{" "}
+								Voir tous les Pixelboards terminés
+							</button>
+						</Link>
+					</span>
 				</div>
 				<table id="boards">
 					<tbody>
@@ -120,9 +170,7 @@ export default class Board extends Component {
 						{tab}
 					</tbody>
 				</table>
-				<div style={{padding: "10%"}}>
-				{spinner &&<Spinner animation="border" variant="danger" size="lg"/>}
-				</div>
+				<div style={{ padding: "10%" }}>{spinner && <Spinner animation="border" variant="danger" size="lg" />}</div>
 				<Modal
 					isOpen={modalIsOpen}
 					onRequestClose={this.closeModal}
@@ -232,3 +280,5 @@ export default class Board extends Component {
 		);
 	}
 }
+
+export default withParams(Board);

@@ -72,7 +72,7 @@ export default class AdminParameters extends Component {
 					</div>
 				</div>
 				<span>
-					<Link to="/allBoard" style={{ textDecoration: "none", color: "white" }}>
+					<Link to="/allBoard/all" style={{ textDecoration: "none", color: "white" }}>
 						<button className="button"> Voir tous les Pixelboards</button>
 					</Link>
 				</span>

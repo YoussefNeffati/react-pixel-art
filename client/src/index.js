@@ -23,7 +23,7 @@ export default function App() {
 					<Route path="pixelArt" element={<DrawingPanel />} />
 					<Route path="login" element={<Login />} />
 					<Route path="inscription" element={<Inscription />} />
-					<Route path="allBoard" element={<Board />} />
+					<Route path="allBoard/:statut" element={<Board />} />
 					<Route path="boardPixelAndDetails/:boardId" element={<BoardPixelAndDetails />} />
 					<Route path="admin" element={<AdminParameters />} />
 					<Route path="users" element={<Users />} />

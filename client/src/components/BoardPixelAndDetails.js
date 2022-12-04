@@ -44,7 +44,7 @@ class BoardPixelAndDetails extends React.Component {
 			<div id="detailsBoard">
 				<h1>Board {this.state.board.title}</h1>
 				<span>
-					<Link to="/allBoard" style={{ textDecoration: "none", color: "white" }}>
+					<Link to="/allBoard/all" style={{ textDecoration: "none", color: "white" }}>
 						<button className="button"> Voir tous les Pixelboards</button>
 					</Link>
 				</span>

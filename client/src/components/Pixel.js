@@ -3,7 +3,7 @@ import "../styles/pixel.scss";
 import Popover from "@mui/material/Button";
 
 export default function Pixel(props) {
-	const { col, line, selectedColor } = props;
+	const { col, line, selectedColor, prevProgress, prevPixels } = props;
 
 	const [pixelColor, setPixelColor] = useState("#fff");
 	const [oldColor, setOldColor] = useState(pixelColor);
@@ -58,30 +58,36 @@ export default function Pixel(props) {
 	}
 
 	async function informationsPixel(fillPixel = false, mouseEnter = false) {
-		await fetch("http://localhost:8000/getpixel", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				x: line,
-				y: col,
-				board: localStorage.getItem("currentboad")
+		if (prevProgress && prevPixels) {
+			setPixelColor(prevPixels.color);
+		} else if (!prevPixels) {
+			setPixelColor("#fff");
+		} else {
+			await fetch("http://localhost:8000/getpixel", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					x: line,
+					y: col,
+					board: localStorage.getItem("currentboad")
+				})
 			})
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.user) {
-					setAuthorPixel(data.user.name);
-				}
-				if (data.color && fillPixel) {
-					setPixelColor(data.color);
-				}
-				if (data.color && mouseEnter) {
-					setPixelColor(data.color);
-				}
-				setDatePixel(new Date(data.createdAt).toLocaleString());
-			});
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.user) {
+						setAuthorPixel(data.user.name);
+					}
+					if (data.color && fillPixel) {
+						setPixelColor(data.color);
+					}
+					if (data.color && mouseEnter) {
+						setPixelColor(data.color);
+					}
+					setDatePixel(new Date(data.createdAt).toLocaleString());
+				});
+		}
 	}
 
 	return (

@@ -1,5 +1,6 @@
 const express = require("express");
 const boardController = require("../controller/board");
+const pixel = require("../models/pixel");
 const app = express();
 
 // get board by id
@@ -24,6 +25,15 @@ app.delete("/deleteboard/:id", boardController.deleteboard);
 app.put("/updateinfosboard/:id", boardController.updateboardinfo);
 
 // search board by name
-app.get("/searchboard/:name", boardController.searchboard);
+app.get("/searchboard/:name/:statut", boardController.searchboard);
+
+// get six last boards by status false
+app.get("/sixLastBoardsInProgress", boardController.getSixLastBoardsInProgress);
+
+// get six last boards by status true
+app.get("/sixLastBoardsFinished", boardController.getSixLastBoardsFinished);
+
+// get all boards by status
+app.get("/allBoardsByStatus/:statut", boardController.getAllBoardsByStatut);
 
 module.exports = app;
