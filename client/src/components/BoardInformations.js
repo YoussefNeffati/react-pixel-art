@@ -67,13 +67,14 @@ export default function boardInformations(props) {
 				Hauteur : <b>{height}</b> pixels
 			</span>
 			<br></br>
-			{localStorage.getItem("username") === author && !statut && (
-				<span>
-					<button className="button" onClick={finishPixelBoard}>
-						Terminer ce pixelboard
-					</button>
-				</span>
-			)}
+			{localStorage.getItem("username") === author ||
+				(localStorage.getItem("role") === "admin" && !statut && (
+					<span>
+						<button className="button" onClick={finishPixelBoard}>
+							Terminer ce pixelboard
+						</button>
+					</span>
+				))}
 		</div>
 	);
 }
