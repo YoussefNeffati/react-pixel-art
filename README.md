@@ -5,53 +5,59 @@ Dans cette application, chaque utilisateur peut colorier un unique pixel toutes 
 
 ## Profil utilisateur
 Nous avons trois profils utilisateurs :
-1. L'administrateur gère les utilisateurs ainsi que les PixelBoard. Il peut : 
- Créer un PixelBoard en spécifiant les propriétés dans un formulaire
--  Modifier, Supprimer un PixelBoard
-- Afficher, trier, filtrer tous les PixelBoards
+
+1. L'administrateur gère les utilisateurs ainsi que les PixelBoard. Il peut :
+    - Créer un PixelBoard en spécifiant les propriétés dans un formulaire
+    -  Modifier, Supprimer un PixelBoard
+    - Afficher, trier, filtrer tous les PixelBoards  
+
 2. Le client peut :
-- Se connecter / s'incrire
-- Voir le nombre d'utilisateur inscrits
-- Voir le nombre de PixelBoard créés.
-- Voir la prévisualisation du dernier PixelBoard en cours de création
-- Modifier le dernier PixelBoard en cours de création
-- Créer un pixel board si aucun n'est en cours de création
-- Consulter les derniers PixelBoard terminés
-- Afficher, filtrer tous les PixelBoards
+    - Se connecter / s'incrire
+    - Voir le nombre d'utilisateur inscrits
+    - Voir le nombre de PixelBoard créés.
+    - Voir la prévisualisation du dernier PixelBoard en cours de création
+    - Modifier le dernier PixelBoard en cours de création
+    - Créer un pixel board si aucun n'est en cours de création
+    - Consulter les derniers PixelBoard terminés
+    - Afficher, filtrer tous les PixelBoards
 
 3. Le visiteur peut:
-- s'inscrire
-- visualiser le dernier pixelboad en cours.
+    - s'inscrire
+    - visualiser le dernier pixelboad en cours.
 
 
-## Démarrage et compilation
-- Taper la commande suivante pour intaller le node-modules et package-lock.json côté client et api.
+## Lancer le projet
+### En local
+- Taper la commande suivante pour installer le node-modules et package-lock.json côté client et api.
 ```bash
-    npm install
+cd api
+npm install
 ```
-### EN local
-Pour démarrer le serveur : se positionner sur le repertoire API sur l'invite de commande:
-
-- Lancer la commande pour démarrer le serveur:
 ```bash
-    node index.js
+cd client 
+npm install --legacy-peer-deps
 ```
-Pour lancer le client: Se positionner sur le repertoire client  sur l'invite de commande et lancer la commande:
+ 
+Lancer la commande suivante sur le repertoire ``api`` pour démarrer le serveur:
 ```bash
-    npm start
+npm start
+```
+Puis lancer la commande sur le repertoire ``client`` pour démarrer le client:
+```bash
+npm start
 ```
 
 ### Sur docker
-## Lancer le projet
-On peut facilement lancer tout le projet avec une seule commande :
+On peut facilement lancer tout le projet avec deux commandes :  
+1.
 ```bash
 docker-compose build
-```
-Docker crée les images serveur et client (si notre machine ne l'a pas avant).
+```  
+2 .
 ```bash
 docker-compose up
 ```
-## Arrêter le projet
+
 L'arrêt de tous les conteneurs en cours d'exécution est également simple avec une seule commande :
 ```bash
 docker-compose down
@@ -97,7 +103,6 @@ Ce projet est "open source".
 - Il peut créer un pixel board si aucun n'est en cours de création
 - Il peut consulter les derniers PixelBoard terminés
 - Il peut  afficher, filtrer tous les PixelBoards
-- Il peut télécharger un pixels board en cours, terminé ou en prévisualisation.
 - Un utilsateur ayant un role admin peut créer un PixelBoard en spécifiant les propriétés dans un formulaire
 -  Un utilsateur ayant un role admin peut Modifier, Supprimer un PixelBoard
 - Un utilisateur a la possibilité de changer le thème de l'application 
@@ -109,10 +114,7 @@ deux thèmes possible (un light et un dark)
 
 ## Bonus:
 
-SuperPixelBoard un PixelBoard qui affiche toutes les créations
-Export un PixelBoard en image (SVG si possible ou png)
-
-
+- Un utilisateur peut télécharger un pixel board en cours, terminé ou en prévisualisation.
 
 ## Versions
 Version de node : v14.17.6
@@ -125,6 +127,7 @@ Les technologies utilisées sont :
 - CSS
 - JS
 - nodeJS
+- MongoDB
 
 ## Comment contribuer
 Pour contribuer, veuillez demander aux auteurs pour que l'on puisse créer un document contributeur.
@@ -138,4 +141,6 @@ Pour la réalisation de ce projet, nous nous sommes ressourcées de :
 
 - https://reactjs.org/docs/getting-started.html pour la docummentation de react.
 -  react-jsonschema-form-validation
+- Create Simple Login form with React JS code : https://contactmentor.com/login-form-react-js-code/
+- How to build a Pixel Art Drawing App in React : https://youtu.be/IAD68la3An8
 - Les apports de cours donner par nos professeurs de ce cours. Mr François et Mr Hugo.
