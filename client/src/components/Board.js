@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import Spinner from "react-bootstrap/Spinner";
 import { useParams } from "react-router-dom";
+import Draw from "./Draw";
 
 function withParams(Component) {
 	return (props) => <Component {...props} params={useParams()} />;
@@ -23,13 +24,11 @@ class Board extends Component {
 	}
 
 	componentDidMount() {
-		console.log("this.state.statut", this.state.statut);
 		fetch("http://localhost:8000/allBoardsByStatus/" + this.state.statut)
 			.then((res) => res.json())
 			.then((data) => {
 				this.setState({ spinner: false });
 				this.setState({ boardData: data });
-				console.log("boardData", this.boardData);
 			});
 	}
 
@@ -63,9 +62,22 @@ class Board extends Component {
 					<td>{new Date(boardData[i].finishedAt).toLocaleString()}</td>
 					<td>
 						<span>
-							<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
-								<button className="buttonBoard">Voir le board</button>
-							</Link>
+							{statut === "all" && (
+								<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
+									<button className="buttonBoard">Voir le board</button>
+								</Link>
+							)}
+							{statut === "finished" && (
+								<Link to={`/boardPixelAndDetails/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
+									<button className="buttonBoard">Voir le board</button>
+								</Link>
+							)}
+							{statut === "progress" && (
+								<Link to={`/draw/${boardData[i]._id}`} style={{ textDecoration: "none", color: "white" }}>
+									<button className="buttonBoard">Dessiner</button>
+								</Link>
+							)}
+
 							{localStorage.getItem("role") === "admin" && (
 								<>
 									<span>

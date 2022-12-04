@@ -7,7 +7,6 @@ async function callServer() {
 	let res = await axios.get("http://localhost:8000/users");
 
 	let data = res.data;
-	console.log(data);
 
 	return data;
 }
@@ -30,8 +29,6 @@ export default function Login() {
 
 		callServer().then((value) => {
 			const userData = value.find((user) => user.name === uname.value);
-
-			console.log(userData);
 
 			// Compare user info
 			if (userData) {

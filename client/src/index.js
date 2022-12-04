@@ -12,6 +12,8 @@ import BoardPixelAndDetails from "./components/BoardPixelAndDetails";
 import AdminParameters from "./components/AdminParameters";
 import Users from "./components/Users";
 import Account from "./components/Account";
+import Draw from "./components/Draw";
+
 localStorage.setItem("theme", "dark");
 
 export default function App() {
@@ -28,6 +30,7 @@ export default function App() {
 					<Route path="admin" element={<AdminParameters />} />
 					<Route path="users" element={<Users />} />
 					<Route path="account" element={<Account />} />
+					<Route path="draw/:idboard" element={<Draw />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

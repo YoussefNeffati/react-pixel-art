@@ -24,7 +24,7 @@ export default function BoardInProgressPrev() {
 			<h1>
 				Les six derniers tableaux en cours{" "}
 				<Link to="/allBoard/progress" style={{ textDecoration: "none", color: "white" }}>
-					<button className="button"> Voir tous les Pixelboards en cours</button>
+					<button className="button"> Choisir un pixelboard à dessiner</button>
 				</Link>
 			</h1>
 

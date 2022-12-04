@@ -20,7 +20,6 @@ export default class Board extends Component {
 		fetch("http://localhost:8000/users")
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("data", data);
 				this.setState({ userData: data });
 			});
 	}

@@ -73,16 +73,16 @@ export default class AdminParameters extends Component {
 				</div>
 				<span>
 					<Link to="/allBoard/all" style={{ textDecoration: "none", color: "white" }}>
-						<button className="button"> Voir tous les Pixelboards</button>
+						<button className="buttonBoard"> Voir tous les Pixelboards</button>
 					</Link>
 				</span>
 				<span>
 					<Link to="/users" style={{ textDecoration: "none", color: "white" }}>
-						<button className="button"> Voir tous les utilisateurs</button>
+						<button className="buttonBoard"> Voir tous les utilisateurs</button>
 					</Link>
 				</span>
 				{!createBoard && (
-					<button onClick={this.showFormCreateBoard} className="button">
+					<button onClick={this.showFormCreateBoard} className="buttonBoard">
 						Créer un nouveau Pixelboard
 					</button>
 				)}

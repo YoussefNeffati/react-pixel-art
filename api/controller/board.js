@@ -34,9 +34,6 @@ exports.saveboard = async (request, response) => {
 		request.body.finishedAt = Date.parse(request.body.finishedAt);
 		const board = new boardModel(request.body);
 		await board.save();
-		response.status(201).send(board);
-		// update all board if finishedAt < now
-		await boardModel.updateMany({ statut: false, finishedAt: { $lt: Date.now() } }, { statut: true });
 	} catch (error) {
 		response.status(500).send(error);
 	}
@@ -155,7 +152,6 @@ exports.getSixLastBoardsInProgress = async (request, response) => {
 		response.status(200).send(boardAndPixels);
 	} catch (error) {
 		response.status(500).send(error);
-		console.log("error", error);
 	}
 };
 
@@ -207,7 +203,6 @@ exports.getSixLastBoardsFinished = async (request, response) => {
 		response.status(200).send(boardAndPixels);
 	} catch (error) {
 		response.status(500).send(error);
-		console.log("error", error);
 	}
 };
 

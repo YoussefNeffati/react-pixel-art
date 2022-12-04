@@ -60,9 +60,7 @@ export default function Pixel(props) {
 	async function informationsPixel(fillPixel = false, mouseEnter = false) {
 		if (prevProgress && prevPixels) {
 			setPixelColor(prevPixels.color);
-		} else if (!prevPixels) {
-			setPixelColor("#fff");
-		} else {
+		} else if (!prevProgress) {
 			await fetch("http://localhost:8000/getpixel", {
 				method: "POST",
 				headers: {

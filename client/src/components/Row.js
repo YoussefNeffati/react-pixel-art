@@ -4,7 +4,6 @@ import Pixel from "./Pixel";
 
 export default function Row(props) {
 	const { width, selectedColor, line, prevProgress, prevPixels } = props;
-	// console.log("prevPixels", prevPixels);
 
 	let pixels = [];
 

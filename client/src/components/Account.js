@@ -70,7 +70,6 @@ export default class Account extends Component {
 	render() {
 		const { userData, modalIsOpen, nbrePixels, nbreBoard, boardsDrawed } = this.state;
 		const boards = [];
-		console.log("boardsDrawed", boardsDrawed);
 		for (let i = 0; i < boardsDrawed.length; i++) {
 			boards.push(
 				<div>
