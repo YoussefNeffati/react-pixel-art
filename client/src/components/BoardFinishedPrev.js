@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../styles/boardinprogressprev.scss";
-import Countdown from "react-countdown";
 import { Link } from "react-router-dom";
 import DrawingPanel from "./DrawingPanel";
 
 export default function BoardInProgressPrev() {
-	const [boardInProgress, setBoardInProgress] = useState([]);
+	const [boardsFinished, setboardsFinished] = useState([]);
 
 	useEffect(() => {
 		getLatestBoard();
@@ -15,8 +14,24 @@ export default function BoardInProgressPrev() {
 		fetch("/sixLastBoardsFinished")
 			.then((res) => res.json())
 			.then((data) => {
-				setBoardInProgress(data);
+				setboardsFinished(data);
 			});
+	}
+	let boards = [];
+
+	for (let i = 0; i < boardsFinished.length; i++) {
+		const boardFinished = boardsFinished[i];
+
+		boards.push(
+			<div className="board" key={i}>
+				<DrawingPanel
+					width={boardFinished.board.nLines}
+					height={boardFinished.board.nColumns}
+					prevProgress={true}
+					prevPixels={boardFinished.pixels}
+				/>
+			</div>
+		);
 	}
 
 	return (
@@ -28,7 +43,7 @@ export default function BoardInProgressPrev() {
 				</Link>
 			</h1>
 
-			{<DrawingPanel width={boardInProgress.nrows} height={boardInProgress.ncols} prevProgress={true} prevPixels={boardInProgress.pixels} />}
+			<div className="sixboards">{boards}</div>
 		</div>
 	);
 }

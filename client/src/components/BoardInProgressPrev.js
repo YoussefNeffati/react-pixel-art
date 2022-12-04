@@ -25,7 +25,7 @@ export default function BoardInProgressPrev() {
 		//localStorage.setItem("currentboad", boardInProgress._id);
 
 		boards.push(
-			<div className="col-3 board" key={i}>
+			<div className="board" key={i}>
 				<DrawingPanel
 					width={boardInProgress.board.nLines}
 					height={boardInProgress.board.nColumns}
